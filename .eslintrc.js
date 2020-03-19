@@ -24,7 +24,7 @@ module.exports = {
     "linebreak-style": ["off"],
     quotes: ["error", "single", { allowTemplateLiterals: true }],
     semi: ["error", "always"],
-    "comma-dangle": ["error", "always-multiline"],
+    "comma-dangle": ["error", "never"],
     "no-console": "off"
   }
 };
