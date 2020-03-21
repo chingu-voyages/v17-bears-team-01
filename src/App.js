@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import AppContext from './context/app-context.js';
+import { Route } from 'react-router-dom';
+
+import Landing from './components/landing/Landing';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,8 +16,14 @@ export default class App extends React.Component {
   render() {
     return (
       <AppContext.Provider value={this.state}>
-        <div>
-          <p>{this.state.user}</p>
+        <div className='#'>
+
+          <Route 
+            exact
+            path='/'
+            component={Landing}
+          />
+
         </div>
       </AppContext.Provider>
     )
