@@ -1,7 +1,13 @@
 const express = require('express');
-const app = express();
-const port = 4000;
+const { ApolloServer, gql } = require('apollo-server-express');
+const { typeDefs } = require("./typeDefs");
+const { resolvers } = require("./resolvers");
 
-app.get('/', (req, res) => res.send('Hello World!'));
+const port = process.env.PORT || 4000;
+
+const server = new ApolloServer({ typeDefs, resolvers });
+
+const app = express();
+server.applyMiddleware({ app });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
