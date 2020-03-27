@@ -1,4 +1,5 @@
 import React from 'react';
+import Nav from '../nav/Nav';
 
 export default class Create extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export default class Create extends React.Component {
   render() {
     return (
       <div>
+        <Nav />
         <form className='create-form' onSubmit={e => this.handleSubmit(e)}>
           <label htmlFor='meetingName'>Meeting Name</label>
           <input 

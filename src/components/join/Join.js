@@ -1,4 +1,5 @@
 import React from 'react';
+import Nav from '../nav/Nav';
 
 export default class Join extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class Join extends React.Component {
   render() {
     return (
       <div>
+        <Nav />
         <form className='join-form' onSubmit={e => this.handleSubmit(e)}>
           <label htmlFor='meetingName'>Meeting Name</label>
           <input 

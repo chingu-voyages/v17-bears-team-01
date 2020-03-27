@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 
 import Landing from './components/landing/Landing';
 import Join from './components/join/Join';
-import Create from './components/create/create';
+import Create from './components/create/Create';
 
 export default class App extends React.Component {
   constructor(props) {
