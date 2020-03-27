@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 
 import Landing from './components/landing/Landing';
 import Join from './components/join/Join';
+import Create from './components/create/create';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -29,6 +30,12 @@ export default class App extends React.Component {
             exact
             path='/join'
             component={Join}
+          />
+
+          <Route 
+            exact
+            path='/create'
+            component={Create}
           />
 
         </div>

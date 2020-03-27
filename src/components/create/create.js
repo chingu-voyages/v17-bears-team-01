@@ -1,12 +1,13 @@
 import React from 'react';
 
-export default class Join extends React.Component {
+export default class Create extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       meetingName: '',
       email: '',
       yourInitials: '',
+      lengthOfMetting: 0,
       timeZone: '',
       error: null
     };
@@ -14,13 +15,13 @@ export default class Join extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('Joining Meeting Test');
+    console.log('Create Meeting Test');
   }
 
   render() {
     return (
       <div>
-        <form className='join-form' onSubmit={e => this.handleSubmit(e)}>
+        <form className='create-form' onSubmit={e => this.handleSubmit(e)}>
           <label htmlFor='meetingName'>Meeting Name</label>
           <input 
             className='join-input'
@@ -51,6 +52,16 @@ export default class Join extends React.Component {
             type='text'
             onChange={e => this.setState({yourInitials: e.target.value.trim()})}>
           </input>
+          <label htmlFor='lengthOfMeeting'>Your Initials</label>
+          <input 
+            className='join-input'
+            required
+            name='lengthOfMeeting'
+            id='lengthOfMeeting'
+            placeholder='Length of Meeting'
+            type='text'
+            onChange={e => this.setState({lengthOfMeeting: e.target.value.trim()})}>
+          </input>
           <label htmlFor='timeZone'>Time Zone</label>
           <input 
             className='join-input'
@@ -62,7 +73,7 @@ export default class Join extends React.Component {
             onChange={e => this.setState({timeZone: e.target.value.trim()})}>
           </input>
           <button className="time-zone-button">Find My Time Zone</button>
-          <button className='join-button' type='submit'>submit</button>
+          <button className='create-button' type='submit'>submit</button>
           {this.state.error ? <p className="error">{this.state.error}</p> : <div className='error-message'>
             <p>Hmm...</p>
             <p>We do not see that meeting</p>
