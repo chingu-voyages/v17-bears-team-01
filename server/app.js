@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { ApolloServer, gql } = require('apollo-server-express');
 const { typeDefs } = require('./typeDefs');
 const { resolvers } = require('./resolvers');
-const passport = require(passport);
+const passport = require('passport');
 
 require('dotenv').config();
 
@@ -18,6 +18,20 @@ const server = new ApolloServer({ typeDefs, resolvers });
 const app = express();
 
 require('./config/passport');
+
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/', session: false }),
+  function(req, res) {
+    const token = req.user.token;
+    
+    res.redirect('http://localhost:3000?token=' + token);
+  }
+);
 
 server.applyMiddleware({ app });
 
