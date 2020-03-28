@@ -4,7 +4,6 @@ import AppContext from './context/app-context.js';
 import { Route } from 'react-router-dom';
 
 import Landing from './components/landing/Landing';
-import Join from './components/join/Join';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -24,13 +23,7 @@ export default class App extends React.Component {
             path='/'
             component={Landing}
           />
-
-          <Route 
-            exact
-            path='/join'
-            component={Join}
-          />
-
+          
         </div>
       </AppContext.Provider>
     );
