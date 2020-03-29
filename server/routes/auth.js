@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
-const CLIENT_HOME_PAGE_URL = 'http://localhost:3000';
+
+require('dotenv').config();
 
 // when login is successful, retrieve user info
 router.get('/login/success', (req, res) => {
@@ -25,7 +26,7 @@ router.get('/login/failed', (req, res) => {
 // When logout, redirect to client
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect(CLIENT_HOME_PAGE_URL);
+  res.redirect(process.env.CLIENT_HOME_PAGE_URL);
 });
 
 // auth with google
@@ -34,20 +35,32 @@ router.get(
   passport.authenticate('google', { scope: ['email', 'profile']})
 );
 
-// redirect to home page after successfully login via twitter
+// auth with facebook
+router.get(
+  '/facebook',
+  passport.authenticate('facebook', { scope: ['email', 'profile']})
+);
+
+// redirect to home page after successfully login via google
 router.get(
   '/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/login/failed'
   }),
   function(req, res) {
-    res.redirect('http://localhost:3000');
+    res.redirect(process.env.CLIENT_HOME_PAGE_URL);
+  }
+);
+
+// redirect to home page after successfully login via facebook
+router.get(
+  '/facebook/callback',
+  passport.authenticate('facebook', {
+    failureRedirect: '/login/failed'
+  }),
+  function(req, res) {
+    res.redirect(process.env.CLIENT_HOME_PAGE_URL);
   }
 );
 
 module.exports = router;
-router.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('localhost:3000/');
-  });

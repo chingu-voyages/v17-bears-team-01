@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../models/user');
 const mongoose = require('mongoose');
 
@@ -65,3 +66,34 @@ passport.use(
     }
   )
 );
+
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+  callbackURL: 'localhost:4000/auth/facebook/callback'
+},
+async (token, tokenSecret, profile, done) => {
+  // find current user in UserModel
+  const currentUser = await User.findOne({
+    userId: profile.id
+  });
+  // create new user if the database doesn't have this user
+  try {
+    if (!currentUser) {
+      console.log('----------------', profile.id, '----------------');
+      const newUser = await new User({
+        _id: new mongoose.Types.ObjectId(),
+        userId: profile.id,
+        email: profile.emails[0].value,
+        username: profile.displayName
+      }).save();
+      if (newUser) {
+        done(null, newUser);
+      }
+    }
+  } catch(error) {
+    console.log(error);
+  }
+  done(null, currentUser);
+}
+));
