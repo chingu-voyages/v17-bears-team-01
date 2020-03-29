@@ -3,6 +3,7 @@ import './App.css';
 import AppContext from './context/app-context.js';
 import { Route } from 'react-router-dom';
 import Login from './components/Login/Login';
+// eslint-disable-next-line no-unused-vars
 import Axios from 'axios';
 import Landing from './components/landing/Landing';
 
@@ -15,13 +16,11 @@ export default class App extends React.Component {
       error: null
     };
   }
- 
+
   componentDidMount() {
-    
-    Axios.get('http://localhost:4000/auth/login/success', {
+    fetch('http://localhost:4000/auth/login/success', {
       method: 'GET',
       credentials: 'include',
-      'mode': 'cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -38,7 +37,8 @@ export default class App extends React.Component {
           user: responseJson.user
         });
       })
-      .catch(() => {
+      // eslint-disable-next-line no-unused-vars
+      .catch(error => {
         this.setState({
           authenticated: false,
           error: 'Failed to authenticate user'
@@ -47,7 +47,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.authenticated);
+    console.log(this.state.user);
     return (
       <AppContext.Provider value={this.state}>
         <div className='#'>
@@ -56,6 +56,7 @@ export default class App extends React.Component {
             exact
             path='/'
             component={Landing}
+            user={this.state.user}
           />
 
           <Route

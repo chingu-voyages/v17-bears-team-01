@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 const { typeDefs } = require('./typeDefs');
 const { resolvers } = require('./resolvers');
 const passport = require('passport');
@@ -21,6 +21,17 @@ const server = new ApolloServer({ typeDefs, resolvers });
 
 const app = express();
 
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['awesomecookiekey'],
+    maxAge: 24 * 60 * 60 * 100
+  })
+);
+
+// parse cookies
+app.use(cookieParser());
+
 // initalize passport
 app.use(passport.initialize());
 // deserialize cookie from the browser
@@ -38,6 +49,7 @@ app.use(
 );
 
 app.use('/auth', authRoutes);
+
 const authCheck = (req, res, next) => {
   if (!req.user) {
     res.status(401).json({

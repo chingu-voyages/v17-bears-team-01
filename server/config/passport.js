@@ -6,12 +6,14 @@ const mongoose = require('mongoose');
 // serialize the user.id to save in the cookie session
 // so the browser will remember the user when login
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.userId);
 });
 
 // deserialize the cookieUserId to user in the database
 passport.deserializeUser((id, done) => {
-  User.findById(id)
+  User.findOne({
+    userId: id
+  })
     .then(user => {
       done(null, user);
     })
