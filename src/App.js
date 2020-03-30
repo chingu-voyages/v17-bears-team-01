@@ -3,8 +3,6 @@ import './App.css';
 import AppContext from './context/app-context.js';
 import { Route } from 'react-router-dom';
 import Login from './components/Login/Login';
-// eslint-disable-next-line no-unused-vars
-import Axios from 'axios';
 import Landing from './components/landing/Landing';
 
 export default class App extends React.Component {
@@ -38,7 +36,7 @@ export default class App extends React.Component {
         });
       })
       // eslint-disable-next-line no-unused-vars
-      .catch(error => {
+      .catch(() => {
         this.setState({
           authenticated: false,
           error: 'Failed to authenticate user'

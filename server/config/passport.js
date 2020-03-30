@@ -2,18 +2,17 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../models/user');
-const mongoose = require('mongoose');
 
 // serialize the user.id to save in the cookie session
 // so the browser will remember the user when login
 passport.serializeUser((user, done) => {
-  done(null, user.userId);
+  done(null, user.id);
 });
 
 // deserialize the cookieUserId to user in the database
 passport.deserializeUser((id, done) => {
   User.findOne({
-    userId: id
+    id: id
   })
     .then(user => {
       done(null, user);
@@ -43,15 +42,13 @@ passport.use(
     async (token, tokenSecret, profile, done) => {
       // find current user in UserModel
       const currentUser = await User.findOne({
-        userId: profile.id
+        id: profile.id
       });
       // create new user if the database doesn't have this user
       try {
         if (!currentUser) {
-          console.log('----------------', profile.id, '----------------');
           const newUser = await new User({
-            _id: new mongoose.Types.ObjectId(),
-            userId: profile.id,
+            id: profile.id,
             email: profile.emails[0].value,
             username: profile.displayName
           }).save();
@@ -75,15 +72,13 @@ passport.use(new FacebookStrategy({
 async (token, tokenSecret, profile, done) => {
   // find current user in UserModel
   const currentUser = await User.findOne({
-    userId: profile.id
+    id: profile.id
   });
   // create new user if the database doesn't have this user
   try {
     if (!currentUser) {
-      console.log('----------------', profile.id, '----------------');
       const newUser = await new User({
-        _id: new mongoose.Types.ObjectId(),
-        userId: profile.id,
+        id: profile.id,
         email: profile.emails[0].value,
         username: profile.displayName
       }).save();
