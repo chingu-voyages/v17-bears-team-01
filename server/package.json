@@ -12,11 +12,18 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^2.11.0",
+    "cookie-parser": "^1.4.5",
+    "cookie-session": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.6"
+    "express-session": "^1.17.0",
+    "mongoose": "^5.9.6",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth": "^2.0.0"
   },
   "devDependencies": {
+    "cors": "^2.8.5",
     "nodemon": "^2.0.2"
   }
 }
