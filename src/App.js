@@ -4,6 +4,9 @@ import AppContext from './context/app-context.js';
 import { Route } from 'react-router-dom';
 import Login from './components/Login/Login';
 import Landing from './components/landing/Landing';
+import Join from './components/join/Join';
+import Create from './components/create/Create';
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -35,7 +38,6 @@ export default class App extends React.Component {
           user: responseJson.user
         });
       })
-      // eslint-disable-next-line no-unused-vars
       .catch(() => {
         this.setState({
           authenticated: false,
@@ -61,6 +63,12 @@ export default class App extends React.Component {
             exact
             path="/login"
             component={Login}
+          />
+
+          <Route 
+            exact
+            path='/create'
+            component={Create}
           />
 
         </div>
