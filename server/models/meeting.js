@@ -6,28 +6,39 @@ var MeetingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    title: String,
-    description: String,
-    duration: Number,
-    availability: String,
-    timezone: String,
-    meetings: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Meeting',
-        default: []
-    }],
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String
+    },
+    duration: {
+        type: Number,
+        required: true
+    },
+    timezone: {
+        type: String,
+        required: true
+    },
     availability: [{
-        from: String,
-        to: String,
+        from: {
+            type: Date,
+            required: true
+        },
+        to: {
+            type: Date,
+            required: true
+        },
     }],
-    particpants: [{
+    participants: [{
         user_id: { 
             type: Schema.Types.ObjectId, 
             ref: 'User'
         },
         intervals: [{
-            from: String,
-            to: String
+            from: Date,
+            to: Date
         }]
     }]
 
