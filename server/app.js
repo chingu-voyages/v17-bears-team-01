@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { ApolloServer } = require('apollo-server-express');
-const { typeDefs } = require('./typeDefs');
-const { resolvers } = require('./resolvers');
+const typeDefs = require('./typedefs');
+const resolvers = require('./resolvers');
 const passport = require('passport');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
@@ -13,11 +13,17 @@ require('dotenv').config();
 
 const port = process.env.PORT || 4000;
 
-mongoose.connect(process.env.MONGO_DB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_DB_URI, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => console.log('Connected to database!'))
   .catch(err => console.log(err));
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ 
+  typeDefs, 
+  resolvers,
+  context: ({req}) => ({
+    user: req.user
+  })
+});
 
 const app = express();
 
