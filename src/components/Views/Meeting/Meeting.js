@@ -8,7 +8,7 @@ export default class Meeting extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         console.log("test")
     }
 
