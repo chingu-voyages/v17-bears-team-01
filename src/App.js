@@ -2,10 +2,11 @@ import React from 'react';
 import './App.css';
 import AppContext from './context/app-context.js';
 import { Route } from 'react-router-dom';
-import Login from './components/Login/Login';
-import Landing from './components/Landing/Landing';
-//import Join from './components/join/Join';
-import Create from './components/Create/Create';
+import Login from './components/Views/Login/Login';
+import Landing from './components/Views/Landing/Landing';
+import Create from './components/Views/Create/Create';
+import Calendar from './components/Views/Calendar/Calendar';
+
 
 
 export default class App extends React.Component {
@@ -70,6 +71,13 @@ export default class App extends React.Component {
             path='/create'
             component={Create}
           />
+
+          <Route 
+            exact
+            path='/calendar'
+            component={Calendar}
+          />
+
 
         </div>
       </AppContext.Provider>
