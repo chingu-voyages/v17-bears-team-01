@@ -3,9 +3,9 @@ import './App.css';
 import AppContext from './context/app-context.js';
 import { Route } from 'react-router-dom';
 import Login from './components/Login/Login';
-import Landing from './components/landing/Landing';
-import Join from './components/join/Join';
-import Create from './components/create/Create';
+import Landing from './components/Landing/Landing';
+//import Join from './components/join/Join';
+import Create from './components/Create/Create';
 
 
 export default class App extends React.Component {
