@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from '../nav/Nav';
+import Nav from '../Nav/Nav';
 
 export default class Create extends React.Component {
   constructor(props) {
