@@ -1,0 +1,29 @@
+@import '../../../styles/settings';
+
+.component {
+  background: $color-side;
+  border: 0;
+  color: $color-main;
+  text-align: center;
+  line-height: 1.3;
+  padding: $base-size;
+  margin: 0 $base-size;
+  border-radius: $radius;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: $transition;
+
+  &:hover {
+    background: darken($color-side, 5%);
+  }
+
+  &.primary {
+    background: $color-main;
+    color: $color-side;
+    &:hover {
+      background: $color-side;
+      color: $color-main;
+    }
+  }
+}
