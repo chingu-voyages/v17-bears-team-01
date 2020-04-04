@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  margin-top: 200px;
+  margin-top: 10vh;
   margin-bottom: 10px;
 
   h1 {
@@ -75,5 +75,22 @@
     .icon {
       font-size: 56px;
     }
+  }
+}
+
+/* On screens that are 400px or less */
+@media screen and (max-height: 400px) {
+  .buttons {
+    padding: 20px 0;
+  }
+}
+
+/* On screens that are 992px or more */
+@media screen and (max-height: 300px) {
+  .buttons {
+    padding: 20px 0;
+  }
+  .subtitle {
+    display: none;
   }
 }
