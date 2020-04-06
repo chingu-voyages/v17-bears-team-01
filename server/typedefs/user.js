@@ -3,7 +3,7 @@ const { gql } = require('apollo-server-express');
 //TODO: mutations: update, delete user
 module.exports = gql `
   type Query {
-    user(id: ID!): User,
+    getUser: User,
   }
 
   type Mutation {

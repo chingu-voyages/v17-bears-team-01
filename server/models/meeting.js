@@ -1,9 +1,8 @@
-const mongoose, { Schema, model } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 var MeetingSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     author: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'User'
     },
     title: {
@@ -11,7 +10,8 @@ var MeetingSchema = new Schema({
         required: true
     },
     description: {
-        type: String
+        type: String,
+        default: ""
     },
     duration: {
         type: Number,
@@ -21,27 +21,22 @@ var MeetingSchema = new Schema({
         type: String,
         required: true
     },
-    availability: [{
-        from: {
-            type: Date,
-            required: true
-        },
-        to: {
-            type: Date,
-            required: true
-        },
-    }],
+    availability: {
+        type: Array,
+        required: true
+    },
     participants: [{
         user_id: { 
-            type: Schema.Types.ObjectId, 
+            type: String, 
             ref: 'User'
         },
-        intervals: [{
-            from: Date,
-            to: Date
-        }]
+        intervals: {
+            type: Array,
+            default: []
+        }
     }]
-
+},{
+    collection: 'meetings'
 });
 
 const Meeting = model("Meeting", MeetingSchema);

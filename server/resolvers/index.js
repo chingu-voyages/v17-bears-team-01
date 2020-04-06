@@ -1,6 +1,6 @@
 const user = require('./user.js');
-//const meeting = require('./meeting.js');
+const meeting = require('./meeting.js');
 
-module.exports = [user];
+module.exports = [user, meeting];
 
   

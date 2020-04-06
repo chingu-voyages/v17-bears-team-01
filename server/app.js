@@ -21,8 +21,13 @@ const server = new ApolloServer({
   typeDefs, 
   resolvers,
   context: ({req}) => ({
-    user: req.user
-  })
+    user: req.user 
+  }),
+  playground: {
+    settings: {
+      'request.credentials': 'include',
+    }
+  }
 });
 
 const app = express();
