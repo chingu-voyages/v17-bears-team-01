@@ -1,10 +1,13 @@
 const User  = require("../models/user");
+const isAuthenticated = require('../config/perm');
 
 module.exports = {
   Query: {
-    user: async (root, args, context, info) => {
-      console.log(context);
-      return User.findbyId(args.id);
+    getUser: async (root, args, context, info) => {
+      await isAuthenticated(context);
+      return User.findOne({id: context.user.id}, function (err, user){
+        if(err) throw new Error("User not found");
+      });
     }
   },
   Mutation: {
