@@ -1,14 +1,16 @@
 const { gql } = require('apollo-server-express');
 
-//TODO: Validation, Auth
+//TODO: Join Meeting, Validation
 module.exports = gql `
   extend type Query {
     getMeeting(id: ID!): Meeting,
+    getMeetings: [Meeting],
   }
 
   extend type Mutation {
-    createMeeting(title: String!, description: String!, duration: Int!, timezone: String!, availability: [String!]!, participants: [ID!]!): Meeting
+    createMeeting(title: String!, description: String, duration: Int!, timezone: String!, availability: [Int!]!, participants: [String!]!): Meeting
     updateMeeting(title: String, description: String, duration: Int, timezone: String, availability: [String], participants: [ID]): Meeting
+    joinMeeting(id: ID!, intervals: [Int]!): Meeting
     deleteMeeting(id: String!): Boolean
   }
   type Meeting {
@@ -18,17 +20,12 @@ module.exports = gql `
     description: String!,
     duration: Int!,
     timezone: String!,
-    availability: [Interval!]!,
+    availability: [Int!]!,
     participants: [Participant!]!
-  }
-
-  type Interval {
-    from: String!,
-    to: String
   }
 
   type Participant {
     user_id: User,
-    intervals: Interval
+    intervals: [Int!]!
   }
 `

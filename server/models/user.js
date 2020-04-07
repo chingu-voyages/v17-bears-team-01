@@ -12,22 +12,21 @@ var UserSchema = new mongoose.Schema({
     unique: true
   },
   password: {
-    type: String,
-    required: true
+    type: String
   },
   name: {
-    type: String,
-    required: true
+    type: String
   },
   timezone: { 
     type: String,
-    required: true
   },
   meetings: [{
     type: mongoose.Types.ObjectId,
     ref: 'Meeting',
     default: []
   }]
+},{
+  collection: 'users'
 });
 
 const User = mongoose.model('User', UserSchema);

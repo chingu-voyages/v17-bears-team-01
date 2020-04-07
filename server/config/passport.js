@@ -24,14 +24,6 @@ passport.deserializeUser((id, done) => {
 
 require('dotenv').config();
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
-
 passport.use(
   new GoogleStrategy(
     {
@@ -53,7 +45,7 @@ passport.use(
             username: profile.displayName
           }).save();
           if (newUser) {
-            done(null, newUser);
+            return done(null, newUser);
           }
         }
       } catch(error) {
@@ -92,3 +84,4 @@ async (token, tokenSecret, profile, done) => {
   done(null, currentUser);
 }
 ));
+

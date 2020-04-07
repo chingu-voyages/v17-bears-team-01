@@ -13,16 +13,25 @@ require('dotenv').config();
 
 const port = process.env.PORT || 4000;
 
-mongoose.connect(process.env.MONGO_DB_URI, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true})
-  .then(() => console.log('Connected to database!'))
+mongoose.connect(process.env.MONGO_DB_URI, { 
+  useCreateIndex: true, 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true,
+  useFindAndModify: true
+}).then(() => console.log('Connected to database!'))
   .catch(err => console.log(err));
 
 const server = new ApolloServer({ 
   typeDefs, 
   resolvers,
   context: ({req}) => ({
-    user: req.user
-  })
+    user: req.user 
+  }),
+  playground: {
+    settings: {
+      'request.credentials': 'include',
+    }
+  }
 });
 
 const app = express();
