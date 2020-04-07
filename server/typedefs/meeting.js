@@ -4,11 +4,13 @@ const { gql } = require('apollo-server-express');
 module.exports = gql `
   extend type Query {
     getMeeting(id: ID!): Meeting,
+    getMeetings: [Meeting],
   }
 
   extend type Mutation {
     createMeeting(title: String!, description: String, duration: Int!, timezone: String!, availability: [Int!]!, participants: [String!]!): Meeting
     updateMeeting(title: String, description: String, duration: Int, timezone: String, availability: [String], participants: [ID]): Meeting
+    joinMeeting(id: ID!, intervals: [Int]!): Meeting
     deleteMeeting(id: String!): Boolean
   }
   type Meeting {
