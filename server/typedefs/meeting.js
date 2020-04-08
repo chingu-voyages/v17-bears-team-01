@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express');
 
-//TODO: Join Meeting, Validation
+//future: updateMeeting
 module.exports = gql `
   extend type Query {
     getMeeting(id: ID!): Meeting,
@@ -8,16 +8,16 @@ module.exports = gql `
   }
 
   extend type Mutation {
-    createMeeting(title: String!, description: String, duration: Int!, timezone: String!, availability: [Int!]!, participants: [String!]!): Meeting
-    updateMeeting(title: String, description: String, duration: Int, timezone: String, availability: [String], participants: [ID]): Meeting
+    createMeeting(title: String!, description: String!, duration: Int!, timezone: String!, availability: [Int!]!, participants: [String!]!): Meeting
+    updateMeeting(title: String!, description: String!, duration: Int!, timezone: String!, availability: [Int!]!, participants: [String!]!): Meeting
     joinMeeting(id: ID!, intervals: [Int]!): Meeting
     deleteMeeting(id: String!): Boolean
   }
   type Meeting {
     id: ID!,
-    author: User!,
+    author: String!,
     title: String!,
-    description: String!,
+    description: String,
     duration: Int!,
     timezone: String!,
     availability: [Int!]!,
@@ -25,7 +25,7 @@ module.exports = gql `
   }
 
   type Participant {
-    user_id: User,
+    user_id: String!,
     intervals: [Int!]!
   }
 `

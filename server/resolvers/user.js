@@ -1,6 +1,7 @@
 const User  = require("../models/user");
 const isAuthenticated = require('../config/perm');
 
+//Mutations saved for future non social auth feature
 module.exports = {
   Query: {
     getUser: async (root, args, context, info) => {

@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express');
 
-//TODO: mutations: update, delete user
+//Mutations for saved
 module.exports = gql `
   type Query {
     getUser: User,
@@ -15,9 +15,6 @@ module.exports = gql `
   type User {
     id: ID!,
     email: String!,
-    password: String!,
     name: String!,
-    timezone: String!,
-    meetings: [Meeting!]!
   }
 `

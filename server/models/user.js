@@ -12,13 +12,13 @@ var UserSchema = new mongoose.Schema({
     unique: true
   },
   password: {
-    type: String
+    type: String  // saved for non social auth 
   },
   name: {
     type: String
   },
   timezone: { 
-    type: String,
+    type: String, // saved for non social auth 
   },
   meetings: [{
     type: mongoose.Types.ObjectId,
