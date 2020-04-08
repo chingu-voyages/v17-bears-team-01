@@ -7,19 +7,22 @@ module.exports = {
     getMeeting: async (root, args, context, info) => {
       await isAuthenticated(context);
       let meeting = Meeting.findbyId(args.id).exec();
-      if(meeting){
+      if (meeting) {
         return meeting;
-      }else{
-        throw new Error("Meeting does not exist");
+      } else {
+        throw new Error('Meeting does not exist');
       }
     },
     getMeetings: async (root, args, context, info) => {
       await isAuthenticated(context);
-      let user = await User.findOne({id: context.user.id}).exec();
-      let meetings = await Meeting.find().where('_id').in(user.meetings).exec();
+      let user = await User.findOne({ id: context.user.id }).exec();
+      let meetings = await Meeting.find()
+        .where('_id')
+        .in(user.meetings)
+        .exec();
       return meetings;
-    }   
-  },  
+    }
+  },
 
   Mutation: {
     createMeeting: async (root, args, context, info) => {
@@ -27,16 +30,16 @@ module.exports = {
 
       const userList = [];
 
-      //create users from participants' emails 
+      //create users from participants' emails
       let pList = [];
-      for await(let email of args.participants){
+      for await (let email of args.participants) {
         const user = await User.findOne({ email }).exec();
-        if(user){
-          pList.push({user_id: user.id, intervals: []});
+        if (user) {
+          pList.push({ user_id: user.id, intervals: [] });
           userList.push(user);
-        }else{
+        } else {
           const user = await User.create({ email });
-          pList.push({user_id: user.id, intervals: []});
+          pList.push({ user_id: user.id, intervals: [] });
           userList.push(user);
         }
       }
@@ -53,11 +56,11 @@ module.exports = {
       });
 
       //add author to list to add meetings
-      let author = await User.findOne({id: context.user.id}).exec();
+      let author = await User.findOne({ id: context.user.id }).exec();
       await userList.push(author);
 
       //add meeting ids to users
-      for await(let user of userList){
+      for await (let user of userList) {
         console.log(user);
         let meetingId = meeting._id;
         //TODO: push meeting id
@@ -67,32 +70,36 @@ module.exports = {
 
       return meeting;
     },
-    deleteMeeting: async(root, args, context, info) => {
+    deleteMeeting: async (root, args, context, info) => {
       await isAuthenticated(context);
       //check if meeting exists else return false
-      let meeting = await Meeting.findById({_id: args.id}).exec();
-      if(meeting){
-        //check if user is author of meeting 
-        if(context.user.id == meeting.author){
-          let result = await Meeting.deleteOne({_id: args.id}).exec();
-          if(result.deletedCount){
+      let meeting = await Meeting.findById({ _id: args.id }).exec();
+      if (meeting) {
+        //check if user is author of meeting
+        if (context.user.id == meeting.author) {
+          let result = await Meeting.deleteOne({ _id: args.id }).exec();
+          if (result.deletedCount) {
             return true;
           }
         }
       }
       return false;
     },
-    joinMeeting: async(root, args, context, info) => {
+    joinMeeting: async (root, args, context, info) => {
       await isAuthenticated(context);
-      let {n} = await Meeting.updateOne({
-        _id: args.id, 'participants.user_id': context.user.id
-      }, {'participants.0.intervals':args.intervals});
-      if(n){
+      let { n } = await Meeting.updateOne(
+        {
+          _id: args.id,
+          'participants.user_id': context.user.id
+        },
+        { 'participants.0.intervals': args.intervals }
+      );
+      if (n) {
         let meeting = await Meeting.findById(args.id).exec();
-        return meeting
-      }else{
-        throw new Error("Error updating meeting");
+        return meeting;
+      } else {
+        throw new Error('Error updating meeting');
       }
     }
   }
-}
+};

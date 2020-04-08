@@ -6,6 +6,11 @@ import Login from './components/Views/Login/Login';
 import Landing from './components/Views/Landing/Landing';
 import Create from './components/Views/Create/Create';
 import Calendar from './components/Views/Calendar/Calendar';
+import ApolloClient from 'apollo-boost';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql'
+});
 
 export default class App extends React.Component {
   constructor(props) {
