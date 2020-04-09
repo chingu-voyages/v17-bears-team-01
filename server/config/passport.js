@@ -42,7 +42,7 @@ passport.use(
           const newUser = await new User({
             id: profile.id,
             email: profile.emails[0].value,
-            username: profile.displayName
+            name: profile.displayName
           }).save();
           if (newUser) {
             return done(null, newUser);
