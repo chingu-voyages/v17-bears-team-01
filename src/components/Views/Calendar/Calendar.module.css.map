@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,OAAO,CAAC,uFAAI;ADEZ,AAAA,aAAa,CAAC;EACV,MAAM,EAAE,KAAK;EACb,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,eAAe,EAAE,MAAM;EACvB,WAAW,EAAE,MAAM;CACtB;;AAED,AAAA,cAAc,CAAC;EACX,KAAK,EAAE,KAAK;CACf;;AAED,AAAA,OAAO,CAAC;EACJ,KAAK,EAAE,KAAK;CACf",
+    "sources": [
+        "Calendar.module.scss",
+        "../../../styles/settings.scss"
+    ],
+    "names": [],
+    "file": "Calendar.module.css"
+}

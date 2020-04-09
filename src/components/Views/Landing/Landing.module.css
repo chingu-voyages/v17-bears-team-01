@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&display=swap");
+.component {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  background-color: #5dbeff;
+}
+
+.title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  margin-top: 20vh;
+  margin-bottom: 10px;
+}
+
+.title h1 {
+  font-size: 72px;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  margin: 0 auto;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 100;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  margin-bottom: 0;
+  padding: 60px 0;
+}
+
+.iconBackground {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #ffff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-bottom: -10px;
+}
+
+.icon {
+  font-size: 29px;
+  color: #5dbeff;
+}
+
+/* On screens that are 992px or more */
+@media screen and (min-width: 992px) {
+  .component {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .title h1 {
+    font-size: 118px;
+  }
+  .subtitle {
+    font-size: x-large;
+  }
+  .iconBackground {
+    width: 100px;
+    height: 100px;
+  }
+  .iconBackground .icon {
+    font-size: 56px;
+  }
+}
+
+/* On screens that are not high as 400px */
+@media screen and (max-height: 400px) {
+  .title {
+    margin-top: 5vh;
+  }
+  .buttons {
+    padding: 20px 0;
+  }
+  .subtitle {
+    display: none;
+  }
+}
+/*# sourceMappingURL=Landing.module.css.map */

@@ -8,6 +8,7 @@ import Create from './components/Views/Create/Create';
 import Calendar from './components/Views/Calendar/Calendar';
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
+import dummyTimes from '../src/dummyData';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql'
@@ -19,7 +20,9 @@ export default class App extends React.Component {
     this.state = {
       user: {},
       authenticated: false,
-      error: null
+      error: null,
+      meetingLength: 0,
+      userTimes: JSON.stringify(dummyTimes)
     };
   }
 
