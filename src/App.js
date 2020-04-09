@@ -7,6 +7,7 @@ import Landing from './components/Views/Landing/Landing';
 import Create from './components/Views/Create/Create';
 import Calendar from './components/Views/Calendar/Calendar';
 import ApolloClient from 'apollo-boost';
+import { gql } from 'apollo-boost';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql'
@@ -23,31 +24,19 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:4000/auth/login/success', {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': true
-      }
-    })
-      .then(response => {
-        if (response.status === 200) return response.json();
-        throw new Error('failed to authenticate user');
+    client
+      .query({
+        query: gql`
+          {
+            getUser {
+              email
+              id
+            }
+          }
+        `
       })
-      .then(responseJson => {
-        this.setState({
-          authenticated: true,
-          user: responseJson.user
-        });
-      })
-      .catch(() => {
-        this.setState({
-          authenticated: false,
-          error: 'Failed to authenticate user'
-        });
-      });
+      .then(result => console.log(result))
+      .catch(error => console.log(error));
   }
 
   render() {
