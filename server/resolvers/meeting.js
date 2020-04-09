@@ -1,12 +1,13 @@
 const User = require('../models/user');
 const Meeting = require('../models/meeting');
 const isAuthenticated = require('../config/perm');
+const meetingValidator = require('../validators/meeting');
 
 module.exports = {
   Query: {
     getMeeting: async (root, args, context, info) => {
       await isAuthenticated(context);
-      let meeting = Meeting.findbyId(args.id).exec();
+      let meeting = await Meeting.findById(args.id).exec();
       if (meeting) {
         return meeting;
       } else {
@@ -27,7 +28,7 @@ module.exports = {
   Mutation: {
     createMeeting: async (root, args, context, info) => {
       await isAuthenticated(context);
-
+      await meetingValidator.validateAsync(args);
       const userList = [];
 
       //create users from participants' emails
@@ -61,7 +62,6 @@ module.exports = {
 
       //add meeting ids to users
       for await (let user of userList) {
-        console.log(user);
         let meetingId = meeting._id;
         //TODO: push meeting id
         user.meetings.push(meetingId);
@@ -87,6 +87,8 @@ module.exports = {
     },
     joinMeeting: async (root, args, context, info) => {
       await isAuthenticated(context);
+      await meetingValidator.validateAsync({ intervals: args.intervals });
+
       let { n } = await Meeting.updateOne(
         {
           _id: args.id,
@@ -94,11 +96,15 @@ module.exports = {
         },
         { 'participants.0.intervals': args.intervals }
       );
+      let meeting = await Meeting.findById(args.id).exec();
       if (n) {
-        let meeting = await Meeting.findById(args.id).exec();
         return meeting;
       } else {
-        throw new Error('Error updating meeting');
+        if (meeting.author == context.user.id) {
+          throw new Error('Author cannot join meeting');
+        } else {
+          throw new Error('User not listed as participant');
+        }
       }
     }
   }
