@@ -1,7 +1,7 @@
 import React from 'react';
 import TimePicker from 'react-time-picker';
 
-class MyApp extends Component {
+export default class TimePick extends React.Component {
   state = {
     time: '10:00',
   }
