@@ -6,6 +6,7 @@ import Login from './components/Views/Login/Login';
 import Landing from './components/Views/Landing/Landing';
 import Create from './components/Views/Create/Create';
 import Calendar from './components/Views/Calendar/Calendar';
+import dummyTimes from '../src/dummyData';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,7 +14,9 @@ export default class App extends React.Component {
     this.state = {
       user: {},
       authenticated: false,
-      error: null
+      error: null,
+      meetingLength: 0,
+      userTimes: JSON.stringify(dummyTimes)
     };
   }
 

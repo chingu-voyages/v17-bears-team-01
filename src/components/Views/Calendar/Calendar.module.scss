@@ -1,0 +1,17 @@
+@import '../../../styles/settings';
+
+.calendarView {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.meetingLength {
+    color: black;
+}
+
+.meetAt {
+    color: black;
+}
