@@ -1,18 +1,34 @@
-import React from "react";
-import Nav from "../../Simple/Nav/Nav";
-import { Mutation } from "@apollo/react-components";
-import { gql } from "apollo-boost";
+import React from 'react';
+import Nav from '../../Simple/Nav/Nav';
+import { Mutation } from '@apollo/react-components';
+import { gql } from 'apollo-boost';
 
 const CREATE_MEETING = gql`
-  mutation {
-    createMeeting {
+  mutation createMeeting(
+    $title: String!
+    $description: String!
+    $duration: Int!
+    $timezone: String!
+    $availability: [Int!]!
+    $participants: [String!]!
+  ) {
+    createMeeting(
+      title: $title
+      description: $description
+      duration: $duration
+      timezone: $timezone
+      availability: $availability
+      participants: $participants
+    ) {
       title
       author
       description
       duration
       timezone
       availability
-      participants
+      participants {
+        user_id
+      }
     }
   }
 `;
@@ -21,11 +37,11 @@ export default class Create extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      meetingName: "",
-      email: "",
-      yourInitials: "",
-      lengthOfMetting: 0,
-      timeZone: "",
+      meetingName: '',
+      email: '',
+      yourInitials: '',
+      lengthOfMeeting: 0,
+      timeZone: '',
       error: null
     };
   }
@@ -34,16 +50,15 @@ export default class Create extends React.Component {
     e.preventDefault();
     createMeeting({
       variables: {
-        title: "title",
-        author: "somebody",
-        description: "",
-        duration: 43,
-        timezone: "ssdssd",
+        title: this.state.meetingName,
+        description: '',
+        duration: parseInt(this.state.lengthOfMeeting),
+        timezone: this.state.timeZone,
         availability: [123123, 1231231],
         participants: []
       }
     }).catch(error => console.log(error));
-    console.log("Create Meeting Test");
+    console.log('Create Meeting Test');
   }
 
   render() {
@@ -99,7 +114,7 @@ export default class Create extends React.Component {
                 name="lengthOfMeeting"
                 id="lengthOfMeeting"
                 placeholder="Length of Meeting"
-                type="text"
+                type="number"
                 onChange={e =>
                   this.setState({ lengthOfMeeting: e.target.value.trim() })
                 }

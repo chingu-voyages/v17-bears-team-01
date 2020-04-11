@@ -1,20 +1,20 @@
-import React from "react";
-import "./App.module.scss";
-import AppContext from "./context/app-context.js";
-import { Route } from "react-router-dom";
-import Login from "./components/Views/Login/Login";
-import Landing from "./components/Views/Landing/Landing";
-import Create from "./components/Views/Create/Create";
-import Calendar from "./components/Views/Calendar/Calendar";
-import ApolloClient from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { HttpLink } from "apollo-link-http";
-import { ApolloProvider } from "@apollo/react-hooks";
-import dummyTimes from "../src/dummyData";
+import React from 'react';
+import './App.module.scss';
+import AppContext from './context/app-context.js';
+import { Route } from 'react-router-dom';
+import Login from './components/Views/Login/Login';
+import Landing from './components/Views/Landing/Landing';
+import Create from './components/Views/Create/Create';
+import Calendar from './components/Views/Calendar/Calendar';
+import ApolloClient from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { ApolloProvider } from '@apollo/react-hooks';
+import dummyTimes from '../src/dummyData';
 
 const link = new HttpLink({
-  uri: "http://localhost:4000/graphql",
-  credentials: "include"
+  uri: 'http://localhost:4000/graphql',
+  credentials: 'include'
 });
 
 const client = new ApolloClient({
@@ -36,18 +36,18 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:4000/auth/login/success", {
-      method: "GET",
-      credentials: "include",
+    fetch('http://localhost:4000/auth/login/success', {
+      method: 'GET',
+      credentials: 'include',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Credentials': true
       }
     })
       .then(response => {
         if (response.status === 200) return response.json();
-        throw new Error("failed to authenticate user");
+        throw new Error('failed to authenticate user');
       })
       .then(responseJson => {
         this.setState({
@@ -58,7 +58,7 @@ export default class App extends React.Component {
       .catch(() => {
         this.setState({
           authenticated: false,
-          error: "Failed to authenticate user"
+          error: 'Failed to authenticate user'
         });
       });
   }
