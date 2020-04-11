@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import Login from './components/Views/Login/Login';
 import Landing from './components/Views/Landing/Landing';
 import Create from './components/Views/Create/Create';
-import Calendar from './components/Views/Calendar/Calendar';
+import CalendarView from './components/Views/Calendar/Calendar';
 import dummyTimes from '../src/dummyData';
 
 export default class App extends React.Component {
@@ -16,7 +16,13 @@ export default class App extends React.Component {
       authenticated: false,
       error: null,
       meetingLength: 0,
-      userTimes: JSON.stringify(dummyTimes)
+      userTimes: JSON.stringify(dummyTimes),
+      timeArr: [],
+      updateCalDays: (days) => {
+        this.setState((state) => {
+          state.timeArr.push(days)
+      })
+      }
     };
   }
 
@@ -59,7 +65,7 @@ export default class App extends React.Component {
 
           <Route exact path="/create" component={Create} />
 
-          <Route exact path="/calendar" component={Calendar} />
+          <Route exact path="/calendar" component={CalendarView} />
         </div>
       </AppContext.Provider>
     );
