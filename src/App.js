@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import Login from './components/Views/Login/Login';
 import Landing from './components/Views/Landing/Landing';
 import Create from './components/Views/Create/Create';
+import Join from './components/Views/Join/Join';
 import Calendar from './components/Views/Calendar/Calendar';
 import ApolloClient from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -74,6 +75,8 @@ export default class App extends React.Component {
             <Route exact path="/login" component={Login} />
 
             <Route exact path="/create" component={Create} />
+
+            <Route exact path="/join" component={Join} />
 
             <Route exact path="/calendar" component={Calendar} />
           </div>
