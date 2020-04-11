@@ -7,15 +7,22 @@ import './Cal.css';
 export default class Cal extends React.Component {
     constructor(props) {
         super(props);
+        this.onClickDay = this.onClickDay.bind(this)
         this.state = {
-            date: new Date()
+            date: new Date(),
+            timeArrr: []
         }
     }
 
     onChange = date => this.setState({ date })
 
-    onClickDay(value) {
-        console.log(moment(value).format('dddd'), 'test day click')
+    onClickDay(value, day) {
+        let days = moment(value).format('MMM Do YY')
+        console.log(days);
+        console.log(this.state.timeArrr);
+        this.setState({
+            timeArrr: this.timeArrr.push(days)
+        })
     }
    
     render() {
