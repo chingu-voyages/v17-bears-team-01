@@ -13,23 +13,25 @@ require('dotenv').config();
 
 const port = process.env.PORT || 4000;
 
-mongoose.connect(process.env.MONGO_DB_URI, { 
-  useCreateIndex: true, 
-  useNewUrlParser: true, 
-  useUnifiedTopology: true,
-  useFindAndModify: true
-}).then(() => console.log('Connected to database!'))
+mongoose
+  .connect(process.env.MONGO_DB_URI, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: true
+  })
+  .then(() => console.log('Connected to database!'))
   .catch(err => console.log(err));
 
-const server = new ApolloServer({ 
-  typeDefs, 
+const server = new ApolloServer({
+  typeDefs,
   resolvers,
-  context: ({req}) => ({
-    user: req.user 
+  context: ({ req }) => ({
+    user: req.user
   }),
   playground: {
     settings: {
-      'request.credentials': 'include',
+      'request.credentials': 'include'
     }
   }
 });
@@ -55,13 +57,13 @@ app.use(passport.session());
 require('./config/passport');
 
 // set up cors to accept requests from client locally
-app.use(
-  cors({
-    origin: 'http://localhost:3000', // allow to server to accept request from different origin
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true // allow session cookie from browser to pass through
-  })
-);
+const corsOptions = {
+  origin: 'http://localhost:3000', // allow to server to accept request from different origin
+  methods: 'GET,POST',
+  credentials: true // allow session cookie from browser to pass through
+};
+
+app.use(cors(corsOptions));
 
 app.use('/auth', authRoutes);
 
@@ -85,6 +87,6 @@ app.get('/', authCheck, (req, res) => {
   });
 });
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, cors: false });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -22,7 +22,7 @@ module.exports = {
   rules: {
     indent: ["error", 2, { SwitchCase: 1 }],
     "linebreak-style": ["off"],
-    quotes: ["error", "single", { allowTemplateLiterals: true }],
+    quotes: ["error", "double", { allowTemplateLiterals: true }],
     semi: ["error", "always"],
     "comma-dangle": ["error", "never"],
     "no-console": "off"
