@@ -17,11 +17,12 @@ export default class Landing extends React.Component {
         </div>
         <h3 className={styles.subtitle}>Bringing Peple Together</h3>
         <div className={styles.buttons}>
-          <Link to="/create">
-            <Button>Create meeting</Button>
+          <Link to="/login">
+            <Button>start meeting people</Button>
           </Link>
-          <Link to="/join">
-            <Button variant="primary">join meeting</Button>
+          <p>have an account?</p>
+          <Link to="/login">
+            <p>sign in</p>
           </Link>
         </div>
         {/* <a href="http://localhost:4000/auth/logout">Click to log out</a> */}
