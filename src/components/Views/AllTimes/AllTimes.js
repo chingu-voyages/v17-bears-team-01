@@ -57,6 +57,7 @@ export default class AllTimes extends React.Component {
             vote: time ,
             voted: true
         })
+        console.log(this.state.vote)
     }
 
     componentDidMount() {
