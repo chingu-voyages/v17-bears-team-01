@@ -1,6 +1,8 @@
 import React from 'react';
 import './Login.css';
 
+// Point to dashboard
+
 function Login() {
   return (
     <div className='login-container'>

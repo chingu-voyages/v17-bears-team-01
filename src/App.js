@@ -6,7 +6,7 @@ import Login from './components/Views/Login/Login';
 import Landing from './components/Views/Landing/Landing';
 import Create from './components/Views/Create/Create';
 import CalendarView from './components/Views/Calendar/Calendar';
-import dummyTimes from '../src/dummyData';
+import Dashboard from './components/Views/Dashboard/Dashboard';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export default class App extends React.Component {
       authenticated: false,
       error: null,
       meetingLength: 0,
-      userTimes: JSON.stringify(dummyTimes),
+      userTimes: JSON.stringify(),
       timeArr: [],
       updateCalDays: (days) => {
         this.setState((state) => {
@@ -62,6 +62,8 @@ export default class App extends React.Component {
           <Route exact path="/" component={Landing} user={this.state.user} />
 
           <Route exact path="/login" component={Login} />
+
+          <Route exact path="/dashboard" component={Dashboard} />
 
           <Route exact path="/create" component={Create} />
 

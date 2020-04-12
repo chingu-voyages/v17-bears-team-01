@@ -5,8 +5,6 @@ import moment from 'moment';
 import styles from './Calendar.module.scss';
 import './Cal.css';
 
-//import TimePick from '../../Simple/TimePicker/TimePicker'
-
 export default class CalendarView extends React.Component {
     static contextType = AppContext;
     constructor(props) {
@@ -54,10 +52,6 @@ export default class CalendarView extends React.Component {
                             {this.state.userDate.map(day => 
                                 <li key={day}>
                                     {day} 
-                                    {/* <TimePick 
-                                        onChangeTime={this.onChangeTime}
-                                        value={this.state.time}
-                                    /> */}
                                     <input 
                                         type="time" 
                                         id="meetingTime" 
