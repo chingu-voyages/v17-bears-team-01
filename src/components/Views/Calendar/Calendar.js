@@ -21,8 +21,8 @@ export default class CalendarView extends React.Component {
 
     onChange = date => this.setState({ date })
 
-    onChangeTime() {
-        this.setState((time) => {
+    onChangeTime(time) {
+        this.setState(() => {
             this.state.time.push(time)
         })
         console.log('test time', this.state.time)
