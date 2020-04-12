@@ -5,8 +5,29 @@ import { Route } from 'react-router-dom';
 import Login from './components/Views/Login/Login';
 import Landing from './components/Views/Landing/Landing';
 import Create from './components/Views/Create/Create';
+<<<<<<< HEAD
+import Join from './components/Views/Join/Join';
+import Calendar from './components/Views/Calendar/Calendar';
+import ApolloClient from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { ApolloProvider } from '@apollo/react-hooks';
+import dummyTimes from '../src/dummyData';
+=======
 import CalendarView from './components/Views/Calendar/Calendar';
 import Dashboard from './components/Views/Dashboard/Dashboard';
+>>>>>>> development
+
+const link = new HttpLink({
+  uri: 'http://localhost:4000/graphql',
+  credentials: 'include'
+});
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link,
+  connectToDevTools: true
+});
 
 export default class App extends React.Component {
   constructor(props) {
@@ -57,12 +78,23 @@ export default class App extends React.Component {
   render() {
     console.log(this.state.user);
     return (
-      <AppContext.Provider value={this.state}>
-        <div className="#">
-          <Route exact path="/" component={Landing} user={this.state.user} />
+      <ApolloProvider client={client}>
+        <AppContext.Provider value={this.state}>
+          <div className="#">
+            <Route exact path="/" component={Landing} user={this.state.user} />
 
-          <Route exact path="/login" component={Login} />
+            <Route exact path="/login" component={Login} />
 
+            <Route exact path="/create" component={Create} />
+
+<<<<<<< HEAD
+            <Route exact path="/join" component={Join} />
+
+            <Route exact path="/calendar" component={Calendar} />
+          </div>
+        </AppContext.Provider>
+      </ApolloProvider>
+=======
           <Route exact path="/dashboard" component={Dashboard} />
 
           <Route exact path="/create" component={Create} />
@@ -70,6 +102,7 @@ export default class App extends React.Component {
           <Route exact path="/calendar" component={CalendarView} />
         </div>
       </AppContext.Provider>
+>>>>>>> development
     );
   }
 }

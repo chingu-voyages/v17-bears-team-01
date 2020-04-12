@@ -4,27 +4,27 @@ module.exports = {
     browser: true,
     node: true
   },
-  parser: "babel-eslint",
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 6,
-    sourceType: "module",
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true
     }
   },
   settings: {
     react: {
-      version: "detect"
+      version: 'detect'
     }
   },
-  plugins: ["react"],
-  extends: ["eslint:recommended", "plugin:react/recommended"],
+  plugins: ['react'],
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
   rules: {
-    indent: ["error", 2, { SwitchCase: 1 }],
-    "linebreak-style": ["off"],
-    quotes: ["error", "single", { allowTemplateLiterals: true }],
-    semi: ["error", "always"],
-    "comma-dangle": ["error", "never"],
-    "no-console": "off"
+    indent: ['error', 2, { SwitchCase: 1 }],
+    'linebreak-style': ['off'],
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
+    semi: ['error', 'always'],
+    'comma-dangle': ['error', 'never'],
+    'no-console': 'off'
   }
 };
