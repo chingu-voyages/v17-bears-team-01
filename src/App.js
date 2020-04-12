@@ -7,6 +7,7 @@ import Landing from './components/Views/Landing/Landing';
 import Create from './components/Views/Create/Create';
 import CalendarView from './components/Views/Calendar/Calendar';
 import Dashboard from './components/Views/Dashboard/Dashboard';
+import AllTimes from './components/Views/AllTimes/AllTimes';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -55,7 +56,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.user);
+    // console.log(this.state.user);
     return (
       <AppContext.Provider value={this.state}>
         <div className="#">
@@ -68,6 +69,8 @@ export default class App extends React.Component {
           <Route exact path="/create" component={Create} />
 
           <Route exact path="/calendar" component={CalendarView} />
+
+          <Route exact path="/alltimes" component={AllTimes} />
         </div>
       </AppContext.Provider>
     );

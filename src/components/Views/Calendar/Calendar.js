@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import styles from './Calendar.module.scss';
 import './Cal.css';
+import { Link } from 'react-router-dom';
 
 export default class CalendarView extends React.Component {
     static contextType = AppContext;
@@ -63,7 +64,9 @@ export default class CalendarView extends React.Component {
                         </ul>
                     </div>
                 </div>
-                <button className='submitTime' type='submit'>Submit Times</button> 
+                <Link to="/AllTimes">
+                    <button className='submitTime' type='submit'>Submit Times</button> 
+                </Link>
             </div>
         )
     }

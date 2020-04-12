@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,OAAO,CAAC,uFAAI;ADEZ,AAAA,eAAe,CAAC;EACZ,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,WAAW,EAAE,MAAM;EACnB,KAAK,EAAE,KAAK;EACZ,gBAAgB,ECNP,OAAO;CDOnB;;AAED,AAAA,YAAY,CAAC;EACT,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;CACtB;;AAED,AAAA,SAAS,CAAC;EACN,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;CACtB;;AAED,AAAA,MAAM,CAAC;EACH,UAAU,EAAE,IAAI;CACnB",
+    "sources": [
+        "AllTimes.module.scss",
+        "../../../styles/settings.scss"
+    ],
+    "names": [],
+    "file": "AllTimes.module.css"
+}
