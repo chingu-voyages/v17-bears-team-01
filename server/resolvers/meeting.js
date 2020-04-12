@@ -1,7 +1,7 @@
-const User = require("../models/user");
-const Meeting = require("../models/meeting");
-const isAuthenticated = require("../config/perm");
-const meetingValidator = require("../validators/meeting");
+const User = require('../models/user');
+const Meeting = require('../models/meeting');
+const isAuthenticated = require('../config/perm');
+const meetingValidator = require('../validators/meeting');
 
 module.exports = {
   Query: {
@@ -11,14 +11,14 @@ module.exports = {
       if (meeting) {
         return meeting;
       } else {
-        throw new Error("Meeting does not exist");
+        throw new Error('Meeting does not exist');
       }
     },
     getMeetings: async (root, args, context, info) => {
       await isAuthenticated(context);
       let user = await User.findOne({ id: context.user.id }).exec();
       let meetings = await Meeting.find()
-        .where("_id")
+        .where('_id')
         .in(user.meetings)
         .exec();
       return meetings;
@@ -87,23 +87,23 @@ module.exports = {
     },
     joinMeeting: async (root, args, context, info) => {
       await isAuthenticated(context);
-      await meetingValidator.validateAsync({ intervals: args.intervals });
+      await meetingValidator.validate({ intervals: args.intervals });
 
       let { n } = await Meeting.updateOne(
         {
           _id: args.id,
-          "participants.user_id": context.user.id
+          'participants.user_id': context.user.id
         },
-        { "participants.0.intervals": args.intervals }
+        { 'participants.0.intervals': args.intervals }
       );
       let meeting = await Meeting.findById(args.id).exec();
       if (n) {
         return meeting;
       } else {
         if (meeting.author == context.user.id) {
-          throw new Error("Author cannot join meeting");
+          throw new Error('Author cannot join meeting');
         } else {
-          throw new Error("User not listed as participant");
+          throw new Error('User not listed as participant');
         }
       }
     }
