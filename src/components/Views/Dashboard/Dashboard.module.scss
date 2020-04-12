@@ -1,0 +1,9 @@
+@import '../../../styles/settings';
+
+.component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: $color-main;
+  }

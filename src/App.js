@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import Login from './components/Views/Login/Login';
 import Landing from './components/Views/Landing/Landing';
 import Create from './components/Views/Create/Create';
+<<<<<<< HEAD
 import Join from './components/Views/Join/Join';
 import Calendar from './components/Views/Calendar/Calendar';
 import ApolloClient from 'apollo-client';
@@ -12,6 +13,10 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from '@apollo/react-hooks';
 import dummyTimes from '../src/dummyData';
+=======
+import CalendarView from './components/Views/Calendar/Calendar';
+import Dashboard from './components/Views/Dashboard/Dashboard';
+>>>>>>> development
 
 const link = new HttpLink({
   uri: 'http://localhost:4000/graphql',
@@ -32,7 +37,13 @@ export default class App extends React.Component {
       authenticated: false,
       error: null,
       meetingLength: 0,
-      userTimes: JSON.stringify(dummyTimes)
+      userTimes: JSON.stringify(),
+      timeArr: [],
+      updateCalDays: (days) => {
+        this.setState((state) => {
+          state.timeArr.push(days)
+      })
+      }
     };
   }
 
@@ -76,12 +87,22 @@ export default class App extends React.Component {
 
             <Route exact path="/create" component={Create} />
 
+<<<<<<< HEAD
             <Route exact path="/join" component={Join} />
 
             <Route exact path="/calendar" component={Calendar} />
           </div>
         </AppContext.Provider>
       </ApolloProvider>
+=======
+          <Route exact path="/dashboard" component={Dashboard} />
+
+          <Route exact path="/create" component={Create} />
+
+          <Route exact path="/calendar" component={CalendarView} />
+        </div>
+      </AppContext.Provider>
+>>>>>>> development
     );
   }
 }

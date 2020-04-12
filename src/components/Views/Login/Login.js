@@ -1,9 +1,11 @@
 import React from 'react';
 import './Login.css';
 
+// Point to dashboard
+
 function Login() {
   return (
-    <div>
+    <div className='login-container'>
       <a href="http://localhost:4000/auth/facebook" className="loginBtn loginBtn--facebook">
       Login with Facebook
       </a>
