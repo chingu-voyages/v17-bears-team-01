@@ -13,6 +13,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import CalendarView from './components/Views/Calendar/Calendar';
 import Dashboard from './components/Views/Dashboard/Dashboard';
 import AllTimes from './components/Views/AllTimes/AllTimes';
+import FinalMeeting from './components/Views/FinalMeeting/FinalMeeting';
 
 const link = new HttpLink({
   uri: 'http://localhost:4000/graphql',
@@ -92,6 +93,8 @@ export default class App extends React.Component {
             <Route exact path="/calendar" component={CalendarView} />
 
             <Route exact path="/alltimes" component={AllTimes} />
+
+            <Route exact path="/finalmeeting" component={FinalMeeting} />
           </div>
         </AppContext.Provider>
       </ApolloProvider>
