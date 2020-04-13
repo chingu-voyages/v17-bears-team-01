@@ -38,8 +38,8 @@ export default class App extends React.Component {
       timeArr: [],
       updateCalDays: (days) => {
         this.setState((state) => {
-          state.timeArr.push(days)
-      })
+          state.timeArr.push(days);
+        });
       }
     };
   }
@@ -54,11 +54,11 @@ export default class App extends React.Component {
         'Access-Control-Allow-Credentials': true
       }
     })
-      .then(response => {
+      .then((response) => {
         if (response.status === 200) return response.json();
         throw new Error('failed to authenticate user');
       })
-      .then(responseJson => {
+      .then((responseJson) => {
         this.setState({
           authenticated: true,
           user: responseJson.user
@@ -73,7 +73,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    // console.log(this.state.user);
+    console.log(this.state.user);
     return (
       <ApolloProvider client={client}>
         <AppContext.Provider value={this.state}>
