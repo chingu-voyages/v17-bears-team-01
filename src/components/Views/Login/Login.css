@@ -1,3 +1,9 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /* Shared */
 .loginBtn {
   box-sizing: border-box;
