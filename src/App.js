@@ -88,8 +88,6 @@ export default class App extends React.Component {
 
             <Route exact path="/dashboard" component={Dashboard} />
 
-            <Route exact path="/create" component={Create} />
-
             <Route exact path="/calendar" component={CalendarView} />
 
             <Route exact path="/alltimes" component={AllTimes} />

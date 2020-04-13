@@ -22,7 +22,21 @@ module.exports = {
         .in(user.meetings)
         .exec();
       return meetings;
-    }
+    },
+    getJoinMeetings: async (root, args, context, info) => {
+      await isAuthenticated(context);
+      let user = await User.findOne({ id: context.user.id }).exec();
+
+      let meetings = await Meeting.find().and([
+        { "participants.0.user_id": user.id },
+        { "participants.0.intervals": [] }
+      ])
+        // .where('participants.user_id').eq(user.id)
+        // .where('participants.intervals').eq([])
+        // .exec();
+        return meetings;
+    },
+
   },
 
   Mutation: {

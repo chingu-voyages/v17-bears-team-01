@@ -5,6 +5,7 @@ module.exports = gql `
   extend type Query {
     getMeeting(id: ID!): Meeting,
     getMeetings: [Meeting],
+    getJoinMeetings: [Meeting]
   }
 
   extend type Mutation {

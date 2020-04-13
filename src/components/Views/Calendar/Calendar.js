@@ -4,26 +4,33 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import styles from './Calendar.module.scss';
 import './Cal.css';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export default class CalendarView extends React.Component {
     static contextType = AppContext;
     constructor(props) {
         super(props);
-        this.onClickDay = this.onClickDay.bind(this)
+        this.onClickDay = this.onClickDay.bind(this);
         this.state = {
             userDate: [],
             date: new Date(),
-            time: []
+            time: {}
         }
     }
 
     onChange = date => this.setState({ date })
 
-    onChangeTime(time) {
-        this.setState(() => {
-            this.state.time.push(time)
+    onChangeTime(data, day) {
+        this.setState((state) => {
+            state.time[data.id] = day + " " + data.value;
+            let rArr = [];
+            // eslint-disable-next-line
+            for(let [key, value] of Object.entries(this.state.time)){
+                rArr.push(moment(value,"MMM Do YY HH:mm").unix());
+            }
+            this.props.handleCalendarChange(rArr);
         })
+
         console.log('test time', this.state.time)
     }
 
@@ -34,6 +41,17 @@ export default class CalendarView extends React.Component {
             state.userDate.push(days)
         })
     }
+
+    // onSubmit(){
+    //     console.log("works");
+    //     let returnArr = [];
+    //     //Convert time objects to unix using moment
+    //     // eslint-disable-next-line
+    //     for(let [key, value] of Object.entries(this.state.time)){
+    //         returnArr.push(moment(value,"MMM Do YY HH:mm").unix());
+    //     }
+    //     this.props.handleSubmit(returnArr, this.props.meeting);
+    // }
 
     render() {
         return(
@@ -52,22 +70,24 @@ export default class CalendarView extends React.Component {
                         <ul>
                             {this.state.userDate.map(day => 
                                 <li key={day}>
-                                    {day} 
                                     <input 
                                         type="time" 
-                                        id="meetingTime" 
+                                        id={Math.random()}
                                         name="meetingTime"
-                                        onChange={(e) => {this.onChangeTime(e.target.value)}}>
+                                        onChange={(e) => {this.onChangeTime(e.target, day)}}>
                                     </input>
                                 </li>
                             )}
                         </ul>
                     </div>
                 </div>
-                <Link to="/AllTimes">
-                    <button className='submitTime' type='submit'>Submit Times</button> 
-                </Link>
             </div>
         )
     }
 }
+
+/*
+<Link to="/AllTimes">
+                    <button onClick={this.onSubmit()} className='submitTime' type='submit'>Submit Times</button> 
+                </Link>
+                */
