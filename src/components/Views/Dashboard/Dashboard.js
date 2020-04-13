@@ -37,7 +37,6 @@ function Dashboard() {
       <Link to="/join">
         <Button>Join</Button>
       </Link>
-      <h2>Meetings you have created:</h2>
       {data.getMeetings.length ? (
         <ul name="meetings">
           {data.getMeetings.map((meeting) => (

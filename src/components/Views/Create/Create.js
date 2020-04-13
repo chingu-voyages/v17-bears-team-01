@@ -3,6 +3,7 @@ import Nav from '../../Simple/Nav/Nav';
 import { Mutation } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
 import Calendar from '../Calendar/Calendar';
+import timezone from 'moment-timezone';
 
 const CREATE_MEETING = gql`
   mutation createMeeting(
@@ -42,12 +43,12 @@ export default class Create extends React.Component {
       email: '',
       yourInitials: '',
       lengthOfMeeting: 0,
-      timeZone: '',
+      timeZone: timezone.tz.guess(),
       error: null,
       rtnArr: []
     };
   }
-  
+
   handleSubmit(e, createMeeting) {
     e.preventDefault();
     createMeeting({
@@ -57,28 +58,29 @@ export default class Create extends React.Component {
         duration: parseInt(this.state.lengthOfMeeting),
         timezone: this.state.timeZone,
         availability: this.state.rtnArr,
-        participants: []
+        participants: this.state.participants
       }
-    }).catch(error => console.log(error));
+    }).catch((error) => console.log(error));
     console.log('Create Meeting Test');
   }
 
-  handleCalendarChange(returnArr){
+  handleCalendarChange(returnArr) {
     this.setState({
       rtnArr: returnArr
-    })
+    });
   }
 
   render() {
+    console.log(this.state);
     return (
       <Mutation mutation={CREATE_MEETING}>
-        {createMeeting => (
+        {(createMeeting) => (
           <div>
             <div>
               <Nav />
               <form
                 className="create-form"
-                onSubmit={e => {
+                onSubmit={(e) => {
                   this.handleSubmit(e, createMeeting);
                 }}
               >
@@ -90,7 +92,7 @@ export default class Create extends React.Component {
                   id="meetingName"
                   placeholder="Meeting Name"
                   type="text"
-                  onChange={e =>
+                  onChange={(e) =>
                     this.setState({ meetingName: e.target.value.trim() })
                   }
                 ></input>
@@ -102,7 +104,9 @@ export default class Create extends React.Component {
                   id="email"
                   placeholder="Email"
                   type="email"
-                  onChange={e => this.setState({ email: e.target.value.trim() })}
+                  onChange={(e) =>
+                    this.setState({ email: e.target.value.trim() })
+                  }
                 ></input>
                 <label htmlFor="yourInitials">Your Initials</label>
                 <input
@@ -112,7 +116,7 @@ export default class Create extends React.Component {
                   id="yourInitials"
                   placeholder="Your Initials"
                   type="text"
-                  onChange={e =>
+                  onChange={(e) =>
                     this.setState({ yourInitials: e.target.value.trim() })
                   }
                 ></input>
@@ -124,7 +128,7 @@ export default class Create extends React.Component {
                   id="lengthOfMeeting"
                   placeholder="Length of Meeting"
                   type="number"
-                  onChange={e =>
+                  onChange={(e) =>
                     this.setState({ lengthOfMeeting: e.target.value.trim() })
                   }
                 ></input>
@@ -134,13 +138,27 @@ export default class Create extends React.Component {
                   required
                   name="timeZone"
                   id="timeZone"
+                  value={this.state.timeZone}
                   placeholder="Time Zone"
                   type="text"
-                  onChange={e =>
+                  disabled
+                  onChange={(e) =>
                     this.setState({ timeZone: e.target.value.trim() })
                   }
                 ></input>
-                <button className="time-zone-button">Find My Time Zone</button>
+                <input
+                  className="join-input"
+                  required
+                  name="participants"
+                  id="participants"
+                  placeholder="Type in email adresses of participants"
+                  type="text"
+                  onChange={(e) => {
+                    const participants = e.target.value.trim().split(', ');
+                    this.setState({ participants: participants });
+                  }}
+                ></input>
+
                 <button className="create-button" type="submit">
                   submit
                 </button>
@@ -155,7 +173,9 @@ export default class Create extends React.Component {
               </form>
             </div>
             <div>
-                <Calendar handleCalendarChange={this.handleCalendarChange.bind(this)}/>
+              <Calendar
+                handleCalendarChange={this.handleCalendarChange.bind(this)}
+              />
             </div>
           </div>
         )}

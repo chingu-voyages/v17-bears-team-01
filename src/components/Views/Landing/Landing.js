@@ -10,11 +10,11 @@ export default class Landing extends React.Component {
     this.buttonClick = this.buttonClick.bind(this);
     this.state = {
       loginButton: false
-    }
+    };
   }
 
   buttonClick() {
-    this.setState({ loginButton: true })
+    this.setState({ loginButton: true });
   }
 
   render() {
@@ -28,20 +28,25 @@ export default class Landing extends React.Component {
         </div>
         <h3 className={styles.subtitle}>Bringing Peple Together</h3>
         <div className={styles.buttons}>
+          {this.state.loginButton === false ? (
+            <Button onClick={this.buttonClick}>start meeting people</Button>
+          ) : (
+            <div className="login-container">
+              <a
+                href="http://localhost:4000/auth/facebook"
+                className="loginBtn loginBtn--facebook"
+              >
+                Login with Facebook
+              </a>
 
-            {this.state.loginButton === false
-            ? <Button onClick={this.buttonClick}>start meeting people</Button>
-            : 
-              <div className='login-container'>
-        <a href="http://localhost:4000/auth/facebook" className="loginBtn loginBtn--facebook">
-        Login with Facebook
-        </a>
-  
-        <a href="http://localhost:4000/auth/google" className="loginBtn loginBtn--google">
-        Login with Google
-        </a>
-      </div>
-            }
+              <a
+                href="http://localhost:4000/auth/google"
+                className="loginBtn loginBtn--google"
+              >
+                Login with Google
+              </a>
+            </div>
+          )}
         </div>
         {/* <a href="http://localhost:4000/auth/logout">Click to log out</a> */}
       </div>
