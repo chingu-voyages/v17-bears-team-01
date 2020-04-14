@@ -28,14 +28,15 @@
     "sass-loader": "^8.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cd server && npm run start && cd .. && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/",
     "server": "cd server && npm run dev",
     "dev": "concurrently \"npm:start\" \"npm:server\"",
-    "install-all": "npm install && cd server && npm install"
+    "install-all": "npm install && cd server && npm install",
+    "post-install": "cd server && npm run start"
   },
   "husky": {
     "hooks": {
