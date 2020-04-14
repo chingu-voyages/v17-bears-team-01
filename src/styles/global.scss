@@ -1,0 +1,25 @@
+@import './settings.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  font-size: ($base-size * 1.1);
+  color: $color-side;
+  background-color: $color-main;
+  letter-spacing: 0.5px;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+}
+
+:global(.container) {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}

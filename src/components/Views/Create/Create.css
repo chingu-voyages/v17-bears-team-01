@@ -1,0 +1,42 @@
+.create-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: darken(#5dbeff, 50%);
+  font-family: sans-serif;
+  min-height: 100vh;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  width: 700px;
+}
+
+.title {
+  font-size: xx-large;
+  text-align: center;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-form label {
+  align-self: flex-start;
+  padding: 5px 10px;
+}
+
+.create-form input {
+  border-radius: 10px;
+  height: 30px;
+  margin: 5px;
+  width: 350px;
+  padding: 10px 10px;
+}
+
+.create-form label {
+  font-size: 20px;
+  margin-top: 10px;
+}

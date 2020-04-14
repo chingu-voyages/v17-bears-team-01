@@ -1,0 +1,30 @@
+.join-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #5dbeff;
+  font-family: sans-serif;
+  min-height: 100vh;
+  width: 700px;
+}
+
+.join-container h2 {
+  font-size: 30px;
+  margin-bottom: 60px;
+}
+
+.meeting-list {
+  list-style-type: none;
+}
+
+.meeting-list li {
+  font-size: 20px;
+}
+
+.options {
+  border: 1px solid white;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 10px;
+}

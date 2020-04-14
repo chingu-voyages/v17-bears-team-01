@@ -1,0 +1,56 @@
+@import '../../../styles/settings';
+
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: $color-main;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 20vh;
+  margin-bottom: 10px;
+
+  h1 {
+    font-size: 72px;
+    font-family: $font-title;
+    margin: 0 auto;
+  }
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 100;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  margin-bottom: 0;
+  padding: 60px 0;
+}
+
+.iconBackground {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-side;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-bottom: -10px;
+}
+
+.icon {
+  font-size: 29px;
+  color: $color-main;
+}

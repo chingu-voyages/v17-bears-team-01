@@ -1,0 +1,21 @@
+@import '../../../styles/settings';
+
+.calendarView {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.meetingLength {
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+.meetAt {
+    color: black;
+}
+
+.testing {
+    list-style-type: none;
+}

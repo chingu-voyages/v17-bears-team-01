@@ -1,0 +1,23 @@
+@import '../../../styles/settings';
+
+.timesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    background-color: $color-main;
+}
+
+.meetingInfo {
+    display: flex;
+    flex-direction: row;
+}
+
+.timeInfo {
+    display: flex;
+    flex-direction: row;
+}
+
+.voted {
+    background: grey;
+}
