@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import AppContext from '../../../context/app-context';
 import Calendar from 'react-calendar';

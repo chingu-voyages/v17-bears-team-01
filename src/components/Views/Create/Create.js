@@ -75,10 +75,9 @@ export default class Create extends React.Component {
     return (
       <Mutation mutation={CREATE_MEETING}>
         {(createMeeting) => (
-          <div className='create-container'>
-    
+          <div className="create-container">
             <div>
-              <h2>Create a Meeting</h2>
+              <h2 className="title">Create a Meeting</h2>
               <Calendar
                 handleCalendarChange={this.handleCalendarChange.bind(this)}
               />
@@ -151,12 +150,13 @@ export default class Create extends React.Component {
                   this.setState({ timeZone: e.target.value.trim() })
                 }
               ></input>
+              <label htmlFor="participants">Participants</label>
               <input
                 className="join-input"
                 required
                 name="participants"
                 id="participants"
-                placeholder="Type in email adresses of participants"
+                placeholder="Participants(emails)"
                 type="text"
                 onChange={(e) => {
                   const participants = e.target.value.trim().split(', ');
@@ -164,9 +164,8 @@ export default class Create extends React.Component {
                 }}
               ></input>
 
-              <Button>Submit</Button>
+              <Button className="btn-submit">Submit</Button>
             </form>
-         
           </div>
         )}
       </Mutation>
