@@ -1,9 +1,10 @@
 import React from 'react';
-import Nav from '../../Simple/Nav/Nav';
 import { Mutation } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
 import Calendar from '../Calendar/Calendar';
 import timezone from 'moment-timezone';
+import './Create.css';
+import Button from '../../Simple/Button/Button';
 
 const CREATE_MEETING = gql`
   mutation createMeeting(
@@ -44,7 +45,6 @@ export default class Create extends React.Component {
       yourInitials: '',
       lengthOfMeeting: 0,
       timeZone: timezone.tz.guess(),
-      error: null,
       rtnArr: []
     };
   }
@@ -75,9 +75,14 @@ export default class Create extends React.Component {
     return (
       <Mutation mutation={CREATE_MEETING}>
         {(createMeeting) => (
-          <div>
+          <div className='create-container'>
+    
             <div>
-              <Nav />
+              <h2>Create a Meeting</h2>
+              <Calendar
+                handleCalendarChange={this.handleCalendarChange.bind(this)}
+              />
+            </div>
               <form
                 className="create-form"
                 onSubmit={(e) => {
@@ -120,7 +125,7 @@ export default class Create extends React.Component {
                     this.setState({ yourInitials: e.target.value.trim() })
                   }
                 ></input>
-                <label htmlFor="lengthOfMeeting">Your Initials</label>
+                <label htmlFor="lengthOfMeeting">Length of Meeting</label>
                 <input
                   className="join-input"
                   required
@@ -159,24 +164,9 @@ export default class Create extends React.Component {
                   }}
                 ></input>
 
-                <button className="create-button" type="submit">
-                  submit
-                </button>
-                {this.state.error ? (
-                  <p className="error">{this.state.error}</p>
-                ) : (
-                  <div className="error-message">
-                    <p>Hmm...</p>
-                    <p>We do not see that meeting</p>
-                  </div>
-                )}
+                <Button>Submit</Button>
               </form>
-            </div>
-            <div>
-              <Calendar
-                handleCalendarChange={this.handleCalendarChange.bind(this)}
-              />
-            </div>
+         
           </div>
         )}
       </Mutation>

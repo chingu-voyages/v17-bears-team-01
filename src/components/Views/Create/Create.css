@@ -1,0 +1,28 @@
+.create-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #5dbeff;
+    font-family: sans-serif;
+    min-height: 100vh;
+}
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-form input {
+    border-radius: 10px;
+    height: 30px;
+    margin: 5px;
+    width: 300px;
+}
+
+.create-form label {
+    font-size: 20px;
+    
+}

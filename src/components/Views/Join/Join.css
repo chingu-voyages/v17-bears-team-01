@@ -1,0 +1,28 @@
+.join-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #5dbeff;
+    font-family: sans-serif;
+    min-height: 100vh;
+}
+
+.join-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.join-form input {
+    border-radius: 10px;
+    height: 30px;
+    margin: 5px;
+    width: 300px;
+}
+
+.join-form label {
+    font-size: 20px;
+    
+}
