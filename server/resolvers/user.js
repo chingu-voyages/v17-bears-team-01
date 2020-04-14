@@ -1,4 +1,5 @@
 const User  = require('../models/user');
+const Meeting = require('../models/meeting');
 const isAuthenticated = require('../config/perm');
 
 //Mutations saved for future non social auth feature
@@ -10,12 +11,21 @@ module.exports = {
       return User.findOne({id: context.user.id}, function (err, user){
         if(err) throw new Error('User not found');
       });
-    }
+    },
     // Returns all users of that meeting
-    // getUsers: async (root, args, context, info) => {
-    //   await isAuthenticated(context);
-
-    // }
+    getUsers: async (root, args, context, info) => {
+      await isAuthenticated(context);
+      let meeting = await Meeting.findById(args.id).exec();
+      console.log(meeting);
+      let ids = [meeting.author];
+      if(meeting.participants.length !== 0){
+        for(let x of meeting.participants){
+          ids.push(x.user_id.toString());
+        }
+      }
+      let users = await User.find({id: ids}).exec();
+      return users;
+    }
   },
   Mutation: {
     register: async (root, args, context, info) => {
