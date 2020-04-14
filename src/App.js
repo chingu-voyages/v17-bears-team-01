@@ -16,7 +16,7 @@ import AllTimes from './components/Views/AllTimes/AllTimes';
 import FinalMeeting from './components/Views/FinalMeeting/FinalMeeting';
 
 const link = new HttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: process.env.REACT_APP_SERVER + '/graphql',
   credentials: 'include'
 });
 
@@ -45,7 +45,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:4000/auth/login/success', {
+    fetch(process.env.REACT_APP_SERVER + '/auth/login/success', {
       method: 'GET',
       credentials: 'include',
       headers: {

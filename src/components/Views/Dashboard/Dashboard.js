@@ -39,12 +39,12 @@ function Dashboard() {
         <Link to="/join">
           <Button>Join</Button>
         </Link>
-        <a href="http://localhost:4000/auth/logout">
+        <a href={process.env.REACT_APP_SERVER + '/auth/logout'}>
           <Button>Log out</Button>
         </a>
       </div>
       {data.getMeetings.length ? (
-        <ul className={styles.meeting}>
+        <ul className={styles.meetings}>
           <h2>Your meetings</h2>
           {data.getMeetings.map((meeting) => (
             <li key={meeting.id} value={meeting.id}>

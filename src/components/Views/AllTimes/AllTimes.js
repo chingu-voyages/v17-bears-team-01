@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styles from './AllTimes.module.scss';
@@ -53,13 +54,13 @@ class AllTimes extends React.Component {
     this.getMeetingId();
   }
 
-  buttonClick(time) {
-    this.setState({
-      vote: time,
-      voted: true
-    });
-    console.log(this.state.vote);
-  }
+  // buttonClick(time) {
+  //   this.setState({
+  //     vote: time,
+  //     voted: true
+  //   });
+  //   console.log(this.state.vote);
+  // }
 
   render() {
     return (
@@ -77,15 +78,16 @@ class AllTimes extends React.Component {
           return (
             <div className={styles.timesContainer}>
               <header>
-                <h2>calendar name</h2>
-                <div className={styles.meetingInfo}></div>
-                <h3>required time:{data.getMeeting.duration} minutes</h3>
+                <h2>User's availability</h2>
+                <div className={styles.meetingInfo}>
+                  <h3>required time:{data.getMeeting.duration} minutes</h3>
+                </div>
               </header>
 
               <div>
                 {data.getUsers.map((user, index) => (
                   <div key={index}>
-                    <h3>{user.email}</h3>
+                    <h3>{user.email} can meet at:</h3>
                     {user.id === data.getMeeting.author ? (
                       <div>
                         {data.getMeeting.availability.map((time, index) => (
@@ -93,9 +95,9 @@ class AllTimes extends React.Component {
                             <p>
                               {moment.unix(time).format('MM/DD/YYYY, HH:mmA')}
                             </p>
-                            <button onClick={() => this.buttonClick(time)}>
+                            {/* <button onClick={() => this.buttonClick(time)}>
                               vote
-                            </button>
+                            </button> */}
                           </div>
                         ))}
                       </div>
@@ -112,11 +114,11 @@ class AllTimes extends React.Component {
                                         .unix(time)
                                         .format('MM/DD/YYYY, HH:mmA')}
                                     </p>
-                                    <button
+                                    {/* <button
                                       onClick={() => this.buttonClick(time)}
                                     >
                                       vote
-                                    </button>
+                                    </button> */}
                                   </div>
                                 ))}
                               </div>

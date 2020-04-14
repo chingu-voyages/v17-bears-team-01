@@ -33,14 +33,14 @@ export default class Landing extends React.Component {
           ) : (
             <div className="login-container">
               <a
-                href="http://localhost:4000/auth/facebook"
+                href={process.env.REACT_APP_SERVER + '/auth/facebook'}
                 className="loginBtn loginBtn--facebook"
               >
                 Login with Facebook
               </a>
 
               <a
-                href="http://localhost:4000/auth/google"
+                href={process.env.REACT_APP_SERVER + '/auth/google'}
                 className="loginBtn loginBtn--google"
               >
                 Login with Google

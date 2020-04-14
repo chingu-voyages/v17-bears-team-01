@@ -32,13 +32,13 @@ router.get('/logout', (req, res) => {
 // auth with google
 router.get(
   '/google',
-  passport.authenticate('google', { scope: ['email', 'profile']})
+  passport.authenticate('google', { scope: ['email', 'profile'] })
 );
 
 // auth with facebook
 router.get(
   '/facebook',
-  passport.authenticate('facebook', { scope: ['email', 'profile']})
+  passport.authenticate('facebook', { scope: ['email', 'profile'] })
 );
 
 // redirect to home page after successfully login via google
@@ -47,8 +47,8 @@ router.get(
   passport.authenticate('google', {
     failureRedirect: '/login/failed'
   }),
-  function(req, res) {
-    res.redirect(process.env.CLIENT_HOME_PAGE_URL);
+  function (req, res) {
+    res.redirect(process.env.CLIENT_HOME_PAGE_URL + '/dashboard');
   }
 );
 
@@ -58,8 +58,8 @@ router.get(
   passport.authenticate('facebook', {
     failureRedirect: '/login/failed'
   }),
-  function(req, res) {
-    res.redirect(process.env.CLIENT_HOME_PAGE_URL);
+  function (req, res) {
+    res.redirect(process.env.CLIENT_HOME_PAGE_URL + '/dashboard');
   }
 );
 
