@@ -34,7 +34,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/",
     "server": "cd server && npm run dev",
-    "dev": "concurrently \"npm:start\" \"npm:server\""
+    "dev": "concurrently \"npm:start\" \"npm:server\"",
+    "install-all": "npm install && cd server && npm install"
   },
   "husky": {
     "hooks": {
