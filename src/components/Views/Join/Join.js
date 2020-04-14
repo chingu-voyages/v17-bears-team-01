@@ -1,9 +1,8 @@
 import React from 'react';
-import Nav from '../../Simple/Nav/Nav';
 import { Query, Mutation } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
-import Calendar from '../Calendar/Calendar';
 import './Join.css';
+import Button from '../../Simple/Button/Button';
 
 const JOIN_MEETING = gql`
   mutation joinMeeting($id: ID!, $intervals: [Int]!) {
@@ -106,24 +105,22 @@ export default class Join extends React.Component {
               //PRINT MEETING DATA
               console.log(data);
               return (
-                <ul>
+                <ul className='meeting-list'>
                   {data &&
                     data.getJoinMeetings.map((meeting) => (
-                      <div key={meeting.id}>
+                      <div className='options' key={meeting.id}>
                         <li key={meeting.id}>
-                          <p>{meeting.title}</p>
-                          <p>{meeting.duration}</p>
-                          <p>{meeting.availability[0]}</p>
+                          <p>Meeting Name: {meeting.title}</p>
+                          <p>Meeting Length: {meeting.duration} hour</p>
                         </li>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            this.onChangeMeeting(e.target, meeting.id);
-                          }}
-                          className="selectMeeting"
-                        >
-                          Select
-                        </button>
+                        <Button
+                        type="button"
+                        onClick={(e) => {
+                          this.onChangeMeeting(e.target, meeting.id);
+                        }}
+                        className="selectMeeting"
+                        >Select</Button>
+
                       </div>
                     ))}
                 </ul>
@@ -134,30 +131,18 @@ export default class Join extends React.Component {
             {(joinMeeting) => (
               <div>
                 <div>
-                  <Nav />
+                  {/* <Nav /> */}
                   <form
                     className="join-form"
                     onSubmit={(e) => {
                       this.handleSubmit(e, joinMeeting);
                     }}
                   >
-                    <button className="time-zone-button">
-                      Find My Time Zone
-                    </button>
-                    <button className="join-button" type="submit">
-                      submit
-                    </button>
-                    {/* {this.state.error ? (
-                    <p className="error">{this.state.error}</p>
-                  ) : (
-                    <div className="error-message">
-                      <p>Hmm...</p>
-                      <p>We do not see that meeting</p>
-                    </div>
-                  )} */}
+                
+           
                   </form>
                 </div>
-                <div>
+                {/* <div>
                   {this.state.currentMeeting && (
                     <Calendar
                       handleCalendarChange={this.handleCalendarChange.bind(
@@ -165,7 +150,7 @@ export default class Join extends React.Component {
                       )}
                     />
                   )}
-                </div>
+                </div> */}
               </div>
             )}
           </Mutation>
@@ -174,50 +159,3 @@ export default class Join extends React.Component {
     );
   }
 }
-
-/* <label htmlFor="meetingName">Meeting Name</label>
-              <input
-                className="join-input"
-                required
-                name="meetingName"
-                id="meetingName"
-                placeholder="Meeting Name"
-                type="text"
-                onChange={e =>
-                  this.setState({ meetingName: e.target.value.trim() })
-                }
-              ></input>
-              <label htmlFor="email">Email</label>
-              <input
-                className="join-input"
-                required
-                name="email"
-                id="email"
-                placeholder="Email"
-                type="email"
-                onChange={e => this.setState({ email: e.target.value.trim() })}
-              ></input>
-              <label htmlFor="yourInitials">Your Initials</label>
-              <input
-                className="join-input"
-                required
-                name="yourInitials"
-                id="yourInitials"
-                placeholder="Your Initials"
-                type="text"
-                onChange={e =>
-                  this.setState({ yourInitials: e.target.value.trim() })
-                }
-              ></input>
-              <label htmlFor="timeZone">Time Zone</label>
-              <input
-                className="join-input"
-                required
-                name="timeZone"
-                id="timeZone"
-                placeholder="Time Zone"
-                type="text"
-                onChange={e =>
-                  this.setState({ timeZone: e.target.value.trim() })
-                }
-              ></input> */

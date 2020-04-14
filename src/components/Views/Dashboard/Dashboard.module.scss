@@ -13,7 +13,5 @@
 
 .buttons {
   display: flex;
-}
-
-.meetings {
+  flex-direction: column;
 }
