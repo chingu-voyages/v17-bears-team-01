@@ -61,13 +61,9 @@ export default class CalendarView extends React.Component {
           value={this.state.date}
           onClickDay={this.onClickDay}
         />
-        <div className={styles.meetingLength}>
-          <p>Meeting Length: {this.props.meetingLength}</p>
-        </div>
         <div className={styles.meetAt}>
-          <p>You could meet at:</p>
-          <div className="testing">
-            <ul>
+          <div>
+            <ul className={styles.testing}>
               {this.state.userDate.map((day, index) => (
                 <li key={day}>
                   <input

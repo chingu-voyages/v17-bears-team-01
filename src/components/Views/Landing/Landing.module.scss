@@ -54,39 +54,3 @@
   font-size: 29px;
   color: $color-main;
 }
-
-/* On screens that are 992px or more */
-@media screen and (min-width: 992px) {
-  .component {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .title {
-    h1 {
-      font-size: 118px;
-    }
-  }
-  .subtitle {
-    font-size: x-large;
-  }
-  .iconBackground {
-    width: 100px;
-    height: 100px;
-    .icon {
-      font-size: 56px;
-    }
-  }
-}
-
-/* On screens that are not high as 400px */
-@media screen and (max-height: 400px) {
-  .title {
-    margin-top: 5vh;
-  }
-  .buttons {
-    padding: 20px 0;
-  }
-  .subtitle {
-    display: none;
-  }
-}

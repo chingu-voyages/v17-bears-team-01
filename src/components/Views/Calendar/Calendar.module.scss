@@ -1,7 +1,6 @@
 @import '../../../styles/settings';
 
 .calendarView {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,7 +8,8 @@
 }
 
 .meetingLength {
-    color: black;
+    font-family: sans-serif;
+    font-size: 20px;
 }
 
 .meetAt {
@@ -17,5 +17,5 @@
 }
 
 .testing {
-    color: black;
+    list-style-type: none;
 }

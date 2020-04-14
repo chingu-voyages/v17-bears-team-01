@@ -3,6 +3,7 @@ import Nav from '../../Simple/Nav/Nav';
 import { Query, Mutation } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
 import Calendar from '../Calendar/Calendar';
+import './Join.css';
 
 
 const JOIN_MEETING = gql`
@@ -91,7 +92,7 @@ export default class Join extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='join-container'>
         <h2>Your Meetings</h2>
         <div>
         <Query query={GET_MEETINGS}>
