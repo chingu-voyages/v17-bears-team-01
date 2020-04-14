@@ -15,3 +15,10 @@
   display: flex;
   flex-direction: column;
 }
+
+.meetings {
+  li {
+    text-decoration: none;
+    font-size: 24px;
+  }
+}

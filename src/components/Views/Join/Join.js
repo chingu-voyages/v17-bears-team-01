@@ -105,22 +105,23 @@ export default class Join extends React.Component {
               //PRINT MEETING DATA
               console.log(data);
               return (
-                <ul className='meeting-list'>
+                <ul className="meeting-list">
                   {data &&
                     data.getJoinMeetings.map((meeting) => (
-                      <div className='options' key={meeting.id}>
+                      <div className="options" key={meeting.id}>
                         <li key={meeting.id}>
                           <p>Meeting Name: {meeting.title}</p>
                           <p>Meeting Length: {meeting.duration} hour</p>
                         </li>
                         <Button
-                        type="button"
-                        onClick={(e) => {
-                          this.onChangeMeeting(e.target, meeting.id);
-                        }}
-                        className="selectMeeting"
-                        >Select</Button>
-
+                          type="button"
+                          onClick={(e) => {
+                            this.onChangeMeeting(e.target, meeting.id);
+                          }}
+                          className="selectMeeting"
+                        >
+                          Select
+                        </Button>
                       </div>
                     ))}
                 </ul>
@@ -137,10 +138,7 @@ export default class Join extends React.Component {
                     onSubmit={(e) => {
                       this.handleSubmit(e, joinMeeting);
                     }}
-                  >
-                
-           
-                  </form>
+                  ></form>
                 </div>
                 {/* <div>
                   {this.state.currentMeeting && (

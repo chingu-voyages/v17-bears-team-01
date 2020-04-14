@@ -44,7 +44,7 @@ function Dashboard() {
         </a>
       </div>
       {data.getMeetings.length ? (
-        <ul className={styles.meeting}>
+        <ul className={styles.meetings}>
           <h2>Your meetings</h2>
           {data.getMeetings.map((meeting) => (
             <li key={meeting.id} value={meeting.id}>

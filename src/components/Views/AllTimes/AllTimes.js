@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styles from './AllTimes.module.scss';
@@ -77,7 +78,7 @@ class AllTimes extends React.Component {
           return (
             <div className={styles.timesContainer}>
               <header>
-                <h2>calendar name</h2>
+                <h2>User's availability</h2>
                 <div className={styles.meetingInfo}>
                   <h3>required time:{data.getMeeting.duration} minutes</h3>
                 </div>
@@ -113,11 +114,11 @@ class AllTimes extends React.Component {
                                         .unix(time)
                                         .format('MM/DD/YYYY, HH:mmA')}
                                     </p>
-                                    <button
+                                    {/* <button
                                       onClick={() => this.buttonClick(time)}
                                     >
                                       vote
-                                    </button>
+                                    </button> */}
                                   </div>
                                 ))}
                               </div>
