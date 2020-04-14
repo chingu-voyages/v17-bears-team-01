@@ -6,25 +6,25 @@
   background-color: #5dbeff;
   font-family: sans-serif;
   min-height: 100vh;
-  border: 1px solid #fff;
-  border-radius: 10px;
   width: 700px;
 }
 
-.join-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.join-container h2 {
+  font-size: 30px;
+  margin-bottom: 60px;
 }
 
-.join-form input {
-  border-radius: 10px;
-  height: 30px;
-  margin: 5px;
-  width: 300px;
+.meeting-list {
+  list-style-type: none;
 }
 
-.join-form label {
+.meeting-list li {
   font-size: 20px;
+}
+
+.options {
+  border: 1px solid white;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 10px;
 }
