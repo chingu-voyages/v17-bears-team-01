@@ -53,13 +53,13 @@ class AllTimes extends React.Component {
     this.getMeetingId();
   }
 
-  buttonClick(time) {
-    this.setState({
-      vote: time,
-      voted: true
-    });
-    console.log(this.state.vote);
-  }
+  // buttonClick(time) {
+  //   this.setState({
+  //     vote: time,
+  //     voted: true
+  //   });
+  //   console.log(this.state.vote);
+  // }
 
   render() {
     return (
@@ -78,14 +78,15 @@ class AllTimes extends React.Component {
             <div className={styles.timesContainer}>
               <header>
                 <h2>calendar name</h2>
-                <div className={styles.meetingInfo}></div>
-                <h3>required time:{data.getMeeting.duration} minutes</h3>
+                <div className={styles.meetingInfo}>
+                  <h3>required time:{data.getMeeting.duration} minutes</h3>
+                </div>
               </header>
 
               <div>
                 {data.getUsers.map((user, index) => (
                   <div key={index}>
-                    <h3>{user.email}</h3>
+                    <h3>{user.email} can meet at:</h3>
                     {user.id === data.getMeeting.author ? (
                       <div>
                         {data.getMeeting.availability.map((time, index) => (
@@ -93,9 +94,9 @@ class AllTimes extends React.Component {
                             <p>
                               {moment.unix(time).format('MM/DD/YYYY, HH:mmA')}
                             </p>
-                            <button onClick={() => this.buttonClick(time)}>
+                            {/* <button onClick={() => this.buttonClick(time)}>
                               vote
-                            </button>
+                            </button> */}
                           </div>
                         ))}
                       </div>
