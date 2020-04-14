@@ -8,6 +8,7 @@ import { gql } from 'apollo-boost';
 const GET_MEETINGS = gql`
   {
     getMeetings {
+      id
       title
       author
       description
@@ -47,7 +48,7 @@ function Dashboard() {
           <h2>Your meetings</h2>
           {data.getMeetings.map((meeting) => (
             <li key={meeting.id} value={meeting.id}>
-              <Link to="/">{meeting.title}</Link>
+              <Link to={`/alltimes/${meeting.id}`}>{meeting.title}</Link>
             </li>
           ))}
         </ul>

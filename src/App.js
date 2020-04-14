@@ -90,7 +90,7 @@ export default class App extends React.Component {
 
             <Route exact path="/calendar" component={CalendarView} />
 
-            <Route exact path="/alltimes" component={AllTimes} />
+            <Route exact path="/alltimes/:id" component={AllTimes} />
 
             <Route exact path="/finalmeeting" component={FinalMeeting} />
           </div>

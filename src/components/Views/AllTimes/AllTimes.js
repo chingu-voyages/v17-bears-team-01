@@ -1,59 +1,56 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styles from './AllTimes.module.scss';
 import AppContext from '../../../context/app-context';
 import { Query } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
+import { withRouter } from 'react-router';
+import moment from 'moment';
 
 const GET_USERS_AND_MEETING = gql`
-    query($id: String!){
-        getUsers(id: $id){
-            id
-            email
-            name
-        }
-        getMeeting(id: $id){
-            title
-            author
-            description
-            duration
-            timezone
-            availability
-            participants {
-                user_id
-                intervals
-            }
-        }
+  query($id: ID!) {
+    getUsers(id: $id) {
+      id
+      email
     }
+    getMeeting(id: $id) {
+      title
+      author
+      description
+      duration
+      timezone
+      availability
+      participants {
+        user_id
+        intervals
+      }
+    }
+  }
 `;
 
-export default class AllTimes extends React.Component {
+class AllTimes extends React.Component {
   static contextType = AppContext;
   constructor(props) {
     super(props);
     this.state = {
-      users: {
-        participants: [
-          {
-            user_id: 'zach',
-            intervals: [123123, 123124, 123125, 123126]
-          },
-          {
-            user_id: 'deep',
-            intervals: [123123, 123124, 123125, 123126]
-          },
-          {
-            user_id: 'piotr',
-            intervals: [123123, 123124, 123125, 123126]
-          },
-          {
-            user_id: 'yuting',
-            intervals: [123123, 123199, 123125, 123126]
-          }
-        ]
-      },
+      meetingId: '',
+      participants: [],
       vote: null,
       voted: false
     };
+  }
+
+  getMeetingId() {
+    if (this.props.location.pathname.split(new RegExp('/alltimes/'))[1]) {
+      const meetingId = this.props.location.pathname.split(
+        new RegExp('/alltimes/')
+      )[1];
+      this.setState({ meetingId: meetingId });
+    }
+  }
+
+  componentDidMount() {
+    this.getMeetingId();
   }
 
   buttonClick(time) {
@@ -64,38 +61,81 @@ export default class AllTimes extends React.Component {
     console.log(this.state.vote);
   }
 
-  componentDidMount() {
-    console.log('test', this.state.users.participants);
-  }
-
   render() {
     return (
-      <div className={styles.timesContainer}>
-        <header>
-          <h2>calendar name</h2>
-          <div className={styles.meetingInfo}>
-            <p>organizer: </p>
-            <p>contact: </p>
-          </div>
-          <h3>requiered time:{this.context.meetingLength}</h3>
-        </header>
+      <Query
+        query={GET_USERS_AND_MEETING}
+        variables={{
+          id: this.state.meetingId
+        }}
+      >
+        {({ loading, error, data }) => {
+          if (loading) return 'Loading...';
+          if (error) return `Error! ${error.message}`;
+          console.log(data);
 
-        <div>
-          {this.state.users.participants.map((user, index) => (
-            <div key={index}>
-              <h3>{user.user_id}</h3>
+          return (
+            <div className={styles.timesContainer}>
+              <header>
+                <h2>calendar name</h2>
+                <div className={styles.meetingInfo}></div>
+                <h3>required time:{data.getMeeting.duration} minutes</h3>
+              </header>
+
               <div>
-                {user.intervals.map((time, index) => (
-                  <div className={styles.timeInfo} key={index}>
-                    <p>{time}</p>
-                    <button onClick={() => this.buttonClick(time)}>vote</button>
+                {data.getUsers.map((user, index) => (
+                  <div key={index}>
+                    <h3>{user.email}</h3>
+                    {user.id === data.getMeeting.author ? (
+                      <div>
+                        {data.getMeeting.availability.map((time, index) => (
+                          <div className={styles.timeInfo} key={index}>
+                            <p>
+                              {moment.unix(time).format('MM/DD/YYYY, HH:mmA')}
+                            </p>
+                            <button onClick={() => this.buttonClick(time)}>
+                              vote
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div>
+                        {data.getMeeting.participants.map(
+                          (participant, index) =>
+                            participant.user_id === user.id ? (
+                              <div key={index}>
+                                {participant.intervals.map((time, index) => (
+                                  <div className={styles.timeInfo} key={index}>
+                                    <p>
+                                      {moment
+                                        .unix(time)
+                                        .format('MM/DD/YYYY, HH:mmA')}
+                                    </p>
+                                    <button
+                                      onClick={() => this.buttonClick(time)}
+                                    >
+                                      vote
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : (
+                              <div>
+                                <p>---------------------</p>
+                              </div>
+                            )
+                        )}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
-          ))}
-        </div>
-      </div>
+          );
+        }}
+      </Query>
     );
   }
 }
+export default withRouter(AllTimes);
