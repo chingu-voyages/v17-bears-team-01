@@ -39,7 +39,7 @@ function Dashboard() {
         <Link to="/join">
           <Button>Join</Button>
         </Link>
-        <a href="http://localhost:4000/auth/logout">
+        <a href={process.env.REACT_APP_SERVER + '/auth/logout'}>
           <Button>Log out</Button>
         </a>
       </div>
