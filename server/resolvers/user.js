@@ -1,15 +1,21 @@
-const User  = require("../models/user");
+const User  = require('../models/user');
 const isAuthenticated = require('../config/perm');
 
 //Mutations saved for future non social auth feature
 module.exports = {
   Query: {
+    // Gets authenticated user
     getUser: async (root, args, context, info) => {
       await isAuthenticated(context);
       return User.findOne({id: context.user.id}, function (err, user){
-        if(err) throw new Error("User not found");
+        if(err) throw new Error('User not found');
       });
     }
+    // Returns all users of that meeting
+    // getUsers: async (root, args, context, info) => {
+    //   await isAuthenticated(context);
+
+    // }
   },
   Mutation: {
     register: async (root, args, context, info) => {
@@ -19,7 +25,7 @@ module.exports = {
           email: args.email,
           password: args.password,
           name: args.name,
-          timezone: args.timezone,
+          timezone: args.timezone
         });
       }catch (e) {
         console.log(e);
@@ -45,4 +51,4 @@ module.exports = {
       //Unserialize User - passport
     }
   } 
-}
+};

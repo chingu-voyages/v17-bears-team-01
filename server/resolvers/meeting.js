@@ -17,25 +17,21 @@ module.exports = {
     getMeetings: async (root, args, context, info) => {
       await isAuthenticated(context);
       let user = await User.findOne({ id: context.user.id }).exec();
-      let meetings = await Meeting.find()
-        .where('_id')
-        .in(user.meetings)
-        .exec();
+      let meetings = await Meeting.find().or([
+        { 'author': user.id },
+        { 'participants': {'$elemMatch': {'user_id': user.id, 'joined': true}}}
+      ]);
       return meetings;
     },
     getJoinMeetings: async (root, args, context, info) => {
       await isAuthenticated(context);
       let user = await User.findOne({ id: context.user.id }).exec();
-
       let meetings = await Meeting.find().and([
-        { "participants.0.user_id": user.id },
-        { "participants.0.intervals": [] }
-      ])
-        // .where('participants.user_id').eq(user.id)
-        // .where('participants.intervals').eq([])
-        // .exec();
-        return meetings;
-    },
+        { 'participants': {'$elemMatch': {'user_id': user.id }}},
+        { 'participants': {'$elemMatch': {'joined': false }}}
+      ]);
+      return meetings;
+    }
 
   },
 
@@ -50,11 +46,11 @@ module.exports = {
       for await (let email of args.participants) {
         const user = await User.findOne({ email }).exec();
         if (user) {
-          pList.push({ user_id: user.id, intervals: [] });
+          pList.push({ user_id: user.id, intervals: [], joined: false });
           userList.push(user);
         } else {
           const user = await User.create({ email });
-          pList.push({ user_id: user.id, intervals: [] });
+          pList.push({ user_id: user.id, intervals: [], joined: false });
           userList.push(user);
         }
       }
@@ -106,9 +102,11 @@ module.exports = {
       let { n } = await Meeting.updateOne(
         {
           _id: args.id,
-          'participants.user_id': context.user.id
+          'participants': {'$elemMatch': { 'user_id': context.user.id }}
         },
-        { 'participants.0.intervals': args.intervals }
+        { 
+          $set: { 'participants.$.intervals': args.intervals, 'participants.$.joined': true}
+        }
       );
       let meeting = await Meeting.findById(args.id).exec();
       if (n) {

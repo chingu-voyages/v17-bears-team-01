@@ -26,7 +26,8 @@ module.exports = gql `
   }
 
   type Participant {
-    user_id: String!,
-    intervals: [Int!]!
+    user_id: String,
+    intervals: [Int!]!,
+    joined: Boolean
   }
-`
+`;

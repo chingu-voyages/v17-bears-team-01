@@ -1,44 +1,48 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 var MeetingSchema = new Schema({
-    author: {
-        type: String,
-        ref: 'User'
+  author: {
+    type: String,
+    ref: 'User'
+  },
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  duration: {
+    type: Number,
+    required: true
+  },
+  timezone: {
+    type: String,
+    required: true
+  },
+  availability: {
+    type: Array,
+    required: true
+  },
+  participants: [{
+    user_id: { 
+      type: String, 
+      ref: 'User'
     },
-    title: {
-        type: String,
-        required: true
+    intervals: {
+      type: Array,
+      default: []
     },
-    description: {
-        type: String,
-        default: ""
-    },
-    duration: {
-        type: Number,
-        required: true
-    },
-    timezone: {
-        type: String,
-        required: true
-    },
-    availability: {
-        type: Array,
-        required: true
-    },
-    participants: [{
-        user_id: { 
-            type: String, 
-            ref: 'User'
-        },
-        intervals: {
-            type: Array,
-            default: []
-        }
-    }]
+    joined: {
+      type: Boolean,
+      default: false
+    }
+  }]
 },{
-    collection: 'meetings'
+  collection: 'meetings'
 });
 
-const Meeting = model("Meeting", MeetingSchema);
+const Meeting = model('Meeting', MeetingSchema);
 
 module.exports = Meeting;
