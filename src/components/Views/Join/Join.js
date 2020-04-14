@@ -5,7 +5,6 @@ import { gql } from 'apollo-boost';
 import Calendar from '../Calendar/Calendar';
 import './Join.css';
 
-
 const JOIN_MEETING = gql`
   mutation joinMeeting($id: ID!, $intervals: [Int]!) {
     joinMeeting(id: $id, intervals: $intervals) {
@@ -52,91 +51,103 @@ export default class Join extends React.Component {
       yourInitials: '',
       timeZone: '',
       error: null,
-      currentMeeting: "",
+      currentMeeting: '',
       rtnArr: []
     };
   }
-  
-  onChangeMeeting(e, meetingID){
+
+  onChangeMeeting(e, meetingID) {
     this.setState({
       currentMeeting: meetingID
-    })
+    });
   }
 
-  handleCalenderChange(returnArr){
+  handleCalenderChange(returnArr) {
     this.setState({
       rtnArr: returnArr
-    })
+    });
   }
 
   handleSubmit(e, joinMeeting) {
     e.preventDefault();
     // ERRORS TO DISPLAY
-    if(this.state.currentMeeting === ""){
-      return console.log("Please select a meeting");
+    if (this.state.currentMeeting === '') {
+      return console.log('Please select a meeting');
     }
     console.log(this.state.rtnArr);
-    if(this.state.rtnArr.length === 0){
-      return console.log("Please select a time");
+    if (this.state.rtnArr.length === 0) {
+      return console.log('Please select a time');
     }
     joinMeeting({
       variables: {
         id: this.state.currentMeeting,
         intervals: this.state.rtnArr
       }
-    }).then(data => console.log(data))
-    .catch(error => console.log(error));
+    })
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
 
     console.log('Meeting Created!');
   }
 
   render() {
     return (
-      <div className='join-container'>
+      <div className="join-container">
         <h2>Your Meetings</h2>
         <div>
-        <Query query={GET_MEETINGS}>
-          {({ loading, error, data }) => { 
+          <Query query={GET_MEETINGS}>
+            {({ loading, error, data }) => {
               if (loading) return 'Loading...';
               if (error) return `Error! ${error.message}`;
               //scuffed
-              if(data.getJoinMeetings === []){
+              if (data.getJoinMeetings === []) {
                 return 'Nothing to show';
               }
               //PRINT MEETING DATA
               console.log(data);
-              return(
-                  <ul>
-                      {data && data.getJoinMeetings.map(meeting => (
-                        <div key={meeting.id}>
-                          <li key={meeting.id}>
-                              <p>{meeting.title}</p>
-                              <p>{meeting.duration}</p>
-                              <p>{meeting.availability[0]}</p>
-                          </li>
-                          <button type="button" onClick={(e) => {this.onChangeMeeting(e.target, meeting.id)}} className='selectMeeting'>Select</button> 
-                        </div>
-                      ))}
-                  </ul>
+              return (
+                <ul>
+                  {data &&
+                    data.getJoinMeetings.map((meeting) => (
+                      <div key={meeting.id}>
+                        <li key={meeting.id}>
+                          <p>{meeting.title}</p>
+                          <p>{meeting.duration}</p>
+                          <p>{meeting.availability[0]}</p>
+                        </li>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            this.onChangeMeeting(e.target, meeting.id);
+                          }}
+                          className="selectMeeting"
+                        >
+                          Select
+                        </button>
+                      </div>
+                    ))}
+                </ul>
               );
-          }}
-        </Query>
-        <Mutation mutation={JOIN_MEETING}>
-          {joinMeeting => (
-            <div>
+            }}
+          </Query>
+          <Mutation mutation={JOIN_MEETING}>
+            {(joinMeeting) => (
               <div>
-                <Nav />
-                <form
-                  className="join-form"
-                  onSubmit={e => {
-                    this.handleSubmit(e, joinMeeting);
-                  }}
-                >
-                  <button className="time-zone-button">Find My Time Zone</button>
-                  <button className="join-button" type="submit">
-                    submit
-                  </button>
-                  {/* {this.state.error ? (
+                <div>
+                  <Nav />
+                  <form
+                    className="join-form"
+                    onSubmit={(e) => {
+                      this.handleSubmit(e, joinMeeting);
+                    }}
+                  >
+                    <button className="time-zone-button">
+                      Find My Time Zone
+                    </button>
+                    <button className="join-button" type="submit">
+                      submit
+                    </button>
+                    {/* {this.state.error ? (
                     <p className="error">{this.state.error}</p>
                   ) : (
                     <div className="error-message">
@@ -144,15 +155,21 @@ export default class Join extends React.Component {
                       <p>We do not see that meeting</p>
                     </div>
                   )} */}
-                </form>
+                  </form>
+                </div>
+                <div>
+                  {this.state.currentMeeting && (
+                    <Calendar
+                      handleCalendarChange={this.handleCalendarChange.bind(
+                        this
+                      )}
+                    />
+                  )}
+                </div>
               </div>
-              <div>
-                  {this.state.currentMeeting && <Calendar handleCalendarChange={this.handleCalendarChange.bind(this)} />}
-              </div>
-            </div>
-          )}
-        </Mutation>
-      </div>
+            )}
+          </Mutation>
+        </div>
       </div>
     );
   }

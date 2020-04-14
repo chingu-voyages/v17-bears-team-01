@@ -2,7 +2,7 @@
 
 .component {
   background: $color-side;
-  width: 200px;
+  width: 150px;
   border: 0;
   color: $color-main;
   text-align: center;
@@ -14,10 +14,10 @@
   font-size: 16px;
   text-transform: uppercase;
   transition: $transition;
-  margin: 20px auto;
+  margin: 20px 10px;
 
   &:hover {
-    background: darken($color-side, 5%);
+    background: darken($color-side, 15%);
   }
 
   &.primary {

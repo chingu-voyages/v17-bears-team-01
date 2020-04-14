@@ -3,9 +3,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #5dbeff;
+  background: darken(#5dbeff, 50%);
   font-family: sans-serif;
   min-height: 100vh;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  width: 700px;
 }
 
 .title {

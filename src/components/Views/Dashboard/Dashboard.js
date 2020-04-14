@@ -31,22 +31,28 @@ function Dashboard() {
   return (
     <div className={styles.component}>
       <h1>Dashboard</h1>
-      <Link to="/create">
-        <Button>Create</Button>
-      </Link>
-      <Link to="/join">
-        <Button>Join</Button>
-      </Link>
+      <div className={styles.buttons}>
+        <Link to="/create">
+          <Button>Create</Button>
+        </Link>
+        <Link to="/join">
+          <Button>Join</Button>
+        </Link>
+        <a href="http://localhost:4000/auth/logout">
+          <Button>Log out</Button>
+        </a>
+      </div>
       {data.getMeetings.length ? (
-        <ul name="meetings">
+        <ul className={styles.meeting}>
+          <h2>Your meetings</h2>
           {data.getMeetings.map((meeting) => (
-            <li key={meeting._id} value={meeting._id}>
+            <li key={meeting.id} value={meeting.id}>
               <Link to="/">{meeting.title}</Link>
             </li>
           ))}
         </ul>
       ) : (
-        <p>
+        <p className={styles.meetings}>
           You have no meetings. You can create one using button CREATE above
         </p>
       )}
