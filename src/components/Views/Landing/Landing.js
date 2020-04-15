@@ -26,7 +26,7 @@ export default class Landing extends React.Component {
           </div>
           <h1>envite</h1>
         </div>
-        <h3 className={styles.subtitle}>Bringing Peple Together</h3>
+        <h3 className={styles.subtitle}>Bringing People Together</h3>
         <div className={styles.buttons}>
           {this.state.loginButton === false ? (
             <Button onClick={this.buttonClick}>start meeting people</Button>
