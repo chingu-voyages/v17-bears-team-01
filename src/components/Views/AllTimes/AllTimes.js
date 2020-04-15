@@ -13,6 +13,7 @@ const GET_USERS_AND_MEETING = gql`
     getUsers(id: $id) {
       id
       email
+      name
     }
     getMeeting(id: $id) {
       title
@@ -73,7 +74,6 @@ class AllTimes extends React.Component {
         {({ loading, error, data }) => {
           if (loading) return 'Loading...';
           if (error) return `Error! ${error.message}`;
-          console.log(data);
 
           return (
             <div className={styles.timesContainer}>
@@ -87,7 +87,7 @@ class AllTimes extends React.Component {
               <div>
                 {data.getUsers.map((user, index) => (
                   <div key={index}>
-                    <h3>{user.email} can meet at:</h3>
+                    <h3>{user.name} ({user.email}) can meet at:</h3>
                     {user.id === data.getMeeting.author ? (
                       <div>
                         {data.getMeeting.availability.map((time, index) => (

@@ -8,6 +8,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -85,6 +86,12 @@ app.get('/', authCheck, (req, res) => {
     user: req.user,
     cookies: req.cookies
   });
+});
+
+app.use(express.static('public'));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
 server.applyMiddleware({ app, cors: false });

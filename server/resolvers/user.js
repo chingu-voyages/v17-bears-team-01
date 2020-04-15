@@ -16,7 +16,6 @@ module.exports = {
     getUsers: async (root, args, context, info) => {
       await isAuthenticated(context);
       let meeting = await Meeting.findById(args.id).exec();
-      console.log(meeting);
       let ids = [meeting.author];
       if(meeting.participants.length !== 0){
         for(let x of meeting.participants){
