@@ -29,7 +29,7 @@ $ npm run post-install
 ## Members
   - Yuting - Product Owner
   - Zach - Frontend Design
-  - Deep - Backend GraphQL
-  - Piotr - Backend Auth
+  - Deep - Backend GraphQL, Validation, MongoDB
+  - Piotr - Backend Auth, Apollo Client
   
 Note: Due to the current situation, we weren't able to meet our goal but our plan to continue the project.
